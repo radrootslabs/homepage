@@ -1,0 +1,14 @@
+# radroots_homepage
+
+This is the README for `homepage` which provides the `radroots.org` web 
+application built with the Leptos Rust framework.
+
+## Copyright
+
+Except as otherwise noted, all files in the `radroots_homepage` distribution are
+
+    Copyright (c) 2026 Tyson Lupul
+
+## License
+
+This repository is licensed under AGPL-3.0-or-later. See LICENSE.
