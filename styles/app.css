@@ -26,6 +26,8 @@
     --page-diagram-margin-block: 16px;
     --page-logo-height: clamp(72px, 22vw, 85px);
     --page-logo-copy-gap: 32px;
+    --page-nav-public-key-size: 12px;
+    --page-nav-public-key-width: 46rem;
     --page-bullet-icon-gap: 0.25em;
     --page-bullet-icon-offset: 0.25em;
     --page-bullet-icon-size: 0.85em;
@@ -66,6 +68,7 @@ body {
     box-sizing: border-box;
     display: flex;
     inline-size: 100%;
+    justify-content: space-between;
     padding: var(--page-gutter) var(--page-gutter) 0;
 }
 
@@ -77,6 +80,18 @@ body {
     block-size: var(--page-logo-height);
     display: block;
     inline-size: auto;
+}
+
+.page-nav-public-key {
+    color: var(--page-ink);
+    font-family: var(--font-mono);
+    font-size: var(--page-nav-public-key-size);
+    line-height: 1;
+    margin: 0 0 0 var(--page-gutter);
+    max-inline-size: min(46vw, var(--page-nav-public-key-width));
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .page-main {

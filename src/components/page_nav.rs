@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-use super::page_link::PageLink;
+use super::{PageNostrKey, page_link::PageLink};
 use crate::i18n::{self, MessageKey};
 
 #[component]
@@ -18,6 +18,7 @@ pub fn PageNav() -> impl IntoView {
                     alt=logo_alt
                 />
             </PageLink>
+            <PageNostrKey />
         </nav>
     }
 }

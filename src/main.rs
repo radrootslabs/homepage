@@ -2,6 +2,7 @@ mod app;
 mod components;
 mod config;
 mod i18n;
+mod nostr;
 mod routes;
 
 use app::App;
