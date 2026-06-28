@@ -16,6 +16,30 @@ home.how_it_works.heading = - How it works -
 
 home.how_it_works.diagram_alt = Farmers, food hubs, local food routes, pickup points, restaurants, shops, families, and neighbors connected through Radroots.
 
+home.network_graph.title = Radroots regional food network
+
+home.network_graph.farmers = Farmers
+
+home.network_graph.food_hubs = Food Hubs
+
+home.network_graph.and_co_ops = and Co-ops
+
+home.network_graph.local = Local
+
+home.network_graph.food_routes = Food Routes
+
+home.network_graph.neighborhood = Neighborhood
+
+home.network_graph.pickup_points = Pickup Points
+
+home.network_graph.restaurants = Restaurants
+
+home.network_graph.and_shops = and Shops
+
+home.network_graph.families = Families
+
+home.network_graph.and_neighbors = and Neighbors
+
 home.how_it_works.stack = Radroots provides a complete application and networking stack that small-scale regional food networks can use for day-to-day organization and communication.
 
 home.how_it_works.notice_marker = (!)

@@ -35,6 +35,8 @@
         var(--page-bullet-icon-gap)
     );
     --page-marker-body-indent: calc(var(--page-marker-width) + var(--page-marker-gap));
+    --page-marker-text-gap: 0em;
+    --page-marker-text-width: 1.1em;
     --page-marker-width: 1.35em;
     --page-section-gap: 12px;
     --page-section-width: 880px;
@@ -161,10 +163,15 @@ body {
 }
 
 .page-marker {
-    font-family: var(--font-mono);
+    display: block;
+    inline-size: var(--page-marker-text-width);
     inset-block-start: 0;
-    inset-inline-start: var(--page-marker-accent-inline-start);
+    inset-inline-start: calc(
+        var(--page-marker-body-indent) - var(--page-marker-text-width) -
+        var(--page-marker-text-gap)
+    );
     position: absolute;
+    white-space: nowrap;
 }
 
 .page-marker-body {
