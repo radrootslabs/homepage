@@ -4,6 +4,8 @@ use mf2_i18n::leptos::RichTextRenderNode;
 use crate::i18n::{self, HomepageHomeHowItWorksNoticeRichArgs, MessageKey};
 use crate::layout::{Footer, Nav};
 
+const RADROOTS_GIT_URL: &str = env!("RADROOTS_GIT_URL");
+
 #[component]
 pub fn Home() -> impl IntoView {
     let i18n = mf2_i18n::leptos::use_i18n();
@@ -14,7 +16,7 @@ pub fn Home() -> impl IntoView {
             RichTextRenderNode::Text(text) => view! { <span>{text}</span> }.into_any(),
             RichTextRenderNode::Slot { name, .. } => match name.as_str() {
                 "open_source" => view! {
-                    <a class="page-link" href="https://radroots.dev/git/">
+                    <a class="page-link" href=RADROOTS_GIT_URL>
                         <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeOpenSourceLabel)}</span>
                     </a>
                 }
