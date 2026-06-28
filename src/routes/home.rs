@@ -5,6 +5,10 @@ use crate::i18n::{self, HomepageHomeHowItWorksNoticeRichArgs, MessageKey};
 use crate::layout::{Footer, Nav};
 
 const RADROOTS_GIT_URL: &str = env!("RADROOTS_GIT_URL");
+const RADROOTS_IOS_URL: &str = env!("RADROOTS_IOS_URL");
+const RADROOTS_ANDROID_URL: &str = env!("RADROOTS_ANDROID_URL");
+const RADROOTS_DESKTOP_URL: &str = env!("RADROOTS_DESKTOP_URL");
+const RADROOTS_CLI_URL: &str = env!("RADROOTS_CLI_URL");
 
 #[component]
 pub fn Home() -> impl IntoView {
@@ -67,7 +71,7 @@ pub fn Home() -> impl IntoView {
                             alt=""
                         />
                         <span class="page-bullet-body">
-                            <a class="page-link page-inline-link page-plain-link" href="#">
+                            <a class="page-link page-inline-link page-plain-link" href=RADROOTS_IOS_URL>
                                 <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadIos)}" "</span>
                                 <img
                                     class="page-inline-icon"
@@ -84,7 +88,7 @@ pub fn Home() -> impl IntoView {
                             alt=""
                         />
                         <span class="page-bullet-body">
-                            <a class="page-link page-inline-link page-plain-link" href="#">
+                            <a class="page-link page-inline-link page-plain-link" href=RADROOTS_ANDROID_URL>
                                 <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadAndroid)}" "</span>
                                 <img
                                     class="page-inline-icon"
@@ -104,7 +108,7 @@ pub fn Home() -> impl IntoView {
                             alt=""
                         />
                         <span class="page-bullet-body">
-                            <a class="page-link page-inline-link page-plain-link" href="#">
+                            <a class="page-link page-inline-link page-plain-link" href=RADROOTS_DESKTOP_URL>
                                 <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadDesktop)}" "</span>
                                 <img
                                     class="page-inline-icon"
@@ -124,7 +128,7 @@ pub fn Home() -> impl IntoView {
                             alt=""
                         />
                         <span class="page-bullet-body">
-                            <a class="page-link page-inline-link page-plain-link" href="#">
+                            <a class="page-link page-inline-link page-plain-link" href=RADROOTS_CLI_URL>
                                 <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadCli)}" "</span>
                                 <img
                                     class="page-inline-icon"
