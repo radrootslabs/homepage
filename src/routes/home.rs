@@ -1,46 +1,47 @@
 use leptos::prelude::*;
 
+use crate::i18n::{self, MessageKey};
 use crate::layout::{Footer, Nav};
 
 #[component]
 pub fn Home() -> impl IntoView {
+    let i18n = mf2_i18n::leptos::use_i18n();
+
     view! {
         <div class="page-shell">
             <Nav />
             <main class="page-main">
                 <section class="page-section">
-                    <p class="page-text">
-                        "Radroots is an application for collaborative farming that operates across open-protocol networks."
-                    </p>
-                    <p class="page-text">
-                        "Local food communities often rely on closed or centralized infrastructure that makes it difficult to build truly interoperable and community-owned networks."
-                    </p>
-                    <p class="page-text">
-                        "Farmers and local food communities use Radroots to coordinate regional food systems, knowing that their activity is built on an open foundation."
-                    </p>
+                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageHomeIntroApplication)}</p>
+                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageHomeIntroInfrastructure)}</p>
+                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageHomeIntroFoundation)}</p>
                 </section>
                 <section class="page-section">
-                    <p class="page-text">"- How it works -"</p>
+                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksHeading)}</p>
                     <img
                         class="page-diagram"
                         src="/assets/radroots_network_graph.svg"
-                        alt="Farmers, food hubs, local food routes, pickup points, restaurants, shops, families, and neighbors connected through Radroots."
+                        alt=i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksDiagramAlt)
                     />
                     <p class="page-text">
-                        <span>"Radroots provides a complete application and networking stack that small-scale regional food networks can use for day-to-day organization and communication."</span>
+                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksStack)}</span>
                     </p>
                     <p class="page-text page-marker-row">
-                        <span class="page-marker">"(!)"</span>
+                        <span class="page-marker">{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeMarker)}</span>
                         <span class="page-marker-body">
-                            <span>"All of the source code for Radroots is "</span>
-                            <a class="page-link" href="https://radroots.dev/git/"><span>"open source"</span></a>
-                            <span>" and we welcome contributions of all kinds. Whether you are a developer, farmer, or have ideas you would like to share, we encourage you to "</span>
-                            <a class="page-link" href="/contact"><span>"contact us"</span></a>
-                            <span>" at any time."</span>
+                            <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticePrefix)}</span>
+                            " "
+                            <a class="page-link" href="https://radroots.dev/git/"><span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeOpenSourceLabel)}</span></a>
+                            " "
+                            <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeMiddle)}</span>
+                            " "
+                            <a class="page-link" href="/contact"><span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeContactLabel)}</span></a>
+                            " "
+                            <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeSuffix)}</span>
                         </span>
                     </p>
                     <p class="page-text">
-                        <span>"Getting started requires a computer, cell phone, or server. Radroots has runtimes available for a diverse set of architectures (IoT coming soon), but for most people the best way to get started will be to download the iOS or Android mobile apps."</span>
+                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeGettingStartedBody)}</span>
                     </p>
                     <p class="page-text page-bullet-row">
                         <img
@@ -50,7 +51,7 @@ pub fn Home() -> impl IntoView {
                         />
                         <span class="page-bullet-body">
                             <a class="page-link page-inline-link page-plain-link" href="#">
-                                <span>"Radroots for iOS "</span>
+                                <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadIos)}" "</span>
                                 <img
                                     class="page-inline-icon"
                                     src="/icons/lucide_arrow_up_right.svg"
@@ -67,7 +68,7 @@ pub fn Home() -> impl IntoView {
                         />
                         <span class="page-bullet-body">
                             <a class="page-link page-inline-link page-plain-link" href="#">
-                                <span>"Radroots for Android "</span>
+                                <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadAndroid)}" "</span>
                                 <img
                                     class="page-inline-icon"
                                     src="/icons/lucide_arrow_up_right.svg"
@@ -77,7 +78,7 @@ pub fn Home() -> impl IntoView {
                         </span>
                     </p>
                     <p class="page-text">
-                        <span>"For anyone wanting to run Radroots on their desktop computer, you can download the Radroots application for Windows, macOS, and Linux operating systems."</span>
+                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeDesktopBody)}</span>
                     </p>
                     <p class="page-text page-bullet-row">
                         <img
@@ -87,7 +88,7 @@ pub fn Home() -> impl IntoView {
                         />
                         <span class="page-bullet-body">
                             <a class="page-link page-inline-link page-plain-link" href="#">
-                                <span>"Radroots for Desktop "</span>
+                                <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadDesktop)}" "</span>
                                 <img
                                     class="page-inline-icon"
                                     src="/icons/lucide_arrow_up_right.svg"
@@ -97,7 +98,7 @@ pub fn Home() -> impl IntoView {
                         </span>
                     </p>
                     <p class="page-text">
-                        <span>"For users interested in scripting with Radroots, or using agentic workflows, Radroots has a command-line interface that can be used individually or concurrently with other Radroots applications."</span>
+                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeCliBody)}</span>
                     </p>
                     <p class="page-text page-bullet-row">
                         <img
@@ -107,7 +108,7 @@ pub fn Home() -> impl IntoView {
                         />
                         <span class="page-bullet-body">
                             <a class="page-link page-inline-link page-plain-link" href="#">
-                                <span>"Radroots CLI "</span>
+                                <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadCli)}" "</span>
                                 <img
                                     class="page-inline-icon"
                                     src="/icons/lucide_arrow_up_right.svg"

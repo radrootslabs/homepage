@@ -1,0 +1,49 @@
+page.title = Radroots. Interoperable food networks
+
+page.logo_alt = Radroots
+
+page.footer.brand = Radroots
+
+page.footer.tagline = People, food, planet.
+
+home.intro.application = Radroots is an application for collaborative farming that operates across open-protocol networks.
+
+home.intro.infrastructure = Local food communities often rely on closed or centralized infrastructure that makes it difficult to build truly interoperable and community-owned networks.
+
+home.intro.foundation = Farmers and local food communities use Radroots to coordinate regional food systems, knowing that their activity is built on an open foundation.
+
+home.how_it_works.heading = - How it works -
+
+home.how_it_works.diagram_alt = Farmers, food hubs, local food routes, pickup points, restaurants, shops, families, and neighbors connected through Radroots.
+
+home.how_it_works.stack = Radroots provides a complete application and networking stack that small-scale regional food networks can use for day-to-day organization and communication.
+
+home.how_it_works.notice_marker = (!)
+
+home.how_it_works.notice_prefix = All of the source code for Radroots is
+
+home.how_it_works.notice_open_source_label = open source
+
+home.how_it_works.notice_middle = and we welcome contributions of all kinds. Whether you are a developer, farmer, or have ideas you would like to share, we encourage you to
+
+home.how_it_works.notice_contact_label = contact us
+
+home.how_it_works.notice_suffix = at any time.
+
+home.getting_started.body = Getting started requires a computer, cell phone, or server. Radroots has runtimes available for a diverse set of architectures (IoT coming soon), but for most people the best way to get started will be to download the iOS or Android mobile apps.
+
+home.download.ios = Radroots for iOS
+
+home.download.android = Radroots for Android
+
+home.desktop.body = For anyone wanting to run Radroots on their desktop computer, you can download the Radroots application for Windows, macOS, and Linux operating systems.
+
+home.download.desktop = Radroots for Desktop
+
+home.cli.body = For users interested in scripting with Radroots, or using agentic workflows, Radroots has a command-line interface that can be used individually or concurrently with other Radroots applications.
+
+home.download.cli = Radroots CLI
+
+contact.body = contact
+
+not_found.body = 404 - No page

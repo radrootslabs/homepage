@@ -1,0 +1,25 @@
+version = 1
+default_locale = "en"
+locales = ["en"]
+project_salt_path = "id_salt.txt"
+
+[[sources]]
+name = "homepage"
+layout = "locale-namespace"
+root = "."
+namespace_glob = "*.mf2"
+
+[[native.targets]]
+name = "app-native"
+out_dir = "../target/mf2/native"
+module_name = "app_i18n"
+locales = ["en"]
+namespaces = ["homepage"]
+
+[[leptos.targets]]
+name = "app"
+native_target = "app-native"
+out_dir = "../target/mf2/leptos"
+module_name = "app_i18n"
+document_title_key = "homepage.page.title"
+sync_html_lang = true

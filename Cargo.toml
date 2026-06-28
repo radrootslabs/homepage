@@ -10,10 +10,15 @@ rust-version = "1.92.0"
 license = "AGPL-3.0-or-later"
 description = "Web homepage for Radroots"
 publish = false
+build = "build.rs"
 
 [dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
 leptos_router = "0.9.0-alpha"
+mf2_i18n = { git = "https://github.com/triesap/mf2_i18n.git", rev = "c0fcdcd1b3c45e49d7e36bcdd0a066dacfc2199a", version = "0.1.0", default-features = false, features = ["leptos"] }
+
+[build-dependencies]
+mf2_i18n = { git = "https://github.com/triesap/mf2_i18n.git", rev = "c0fcdcd1b3c45e49d7e36bcdd0a066dacfc2199a", version = "0.1.0", default-features = false, features = ["build"] }
 
 [lints.rust]
 unsafe_code = "forbid"
