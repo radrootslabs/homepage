@@ -801,6 +801,42 @@ dependencies = [
 ]
 
 [[package]]
+name = "leptos_router"
+version = "0.9.0-alpha"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "43e1e4fbf241abbe8346e892d0d410fcfb5ff58babcdc98edff15123860d23a2"
+dependencies = [
+ "any_spawner",
+ "either_of",
+ "futures",
+ "gloo-net",
+ "js-sys",
+ "leptos",
+ "leptos_router_macro",
+ "or_poisoned",
+ "reactive_graph",
+ "rustc_version",
+ "send_wrapper",
+ "tachys",
+ "thiserror 2.0.18",
+ "url",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
+name = "leptos_router_macro"
+version = "0.9.0-alpha"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c5b04bc8df7f1f4b5aa853e2cf134536eefca350b8981dd7589a3ceb0a0622a2"
+dependencies = [
+ "proc-macro-error2",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "leptos_server"
 version = "0.9.0-alpha"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1055,6 +1091,7 @@ name = "radroots_homepage"
 version = "0.1.0"
 dependencies = [
  "leptos",
+ "leptos_router",
 ]
 
 [[package]]
