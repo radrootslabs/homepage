@@ -1,14 +1,10 @@
 use leptos::prelude::*;
 use mf2_i18n::leptos::RichTextRenderNode;
 
+use crate::components::{PageBulletLink, PageMarkerText, PageText};
+use crate::config;
 use crate::i18n::{self, HomepageHomeHowItWorksNoticeRichArgs, MessageKey};
-use crate::layout::{Footer, Nav};
-
-const RADROOTS_GIT_URL: &str = env!("RADROOTS_GIT_URL");
-const RADROOTS_IOS_URL: &str = env!("RADROOTS_IOS_URL");
-const RADROOTS_ANDROID_URL: &str = env!("RADROOTS_ANDROID_URL");
-const RADROOTS_DESKTOP_URL: &str = env!("RADROOTS_DESKTOP_URL");
-const RADROOTS_CLI_URL: &str = env!("RADROOTS_CLI_URL");
+use crate::layout::{PageFooter, PageNav};
 
 #[component]
 pub fn Home() -> impl IntoView {
@@ -20,7 +16,7 @@ pub fn Home() -> impl IntoView {
             RichTextRenderNode::Text(text) => view! { <span>{text}</span> }.into_any(),
             RichTextRenderNode::Slot { name, .. } => match name.as_str() {
                 "open_source" => view! {
-                    <a class="page-link" href=RADROOTS_GIT_URL>
+                    <a class="page-link" href=config::RADROOTS_GIT_URL>
                         <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeOpenSourceLabel)}</span>
                     </a>
                 }
@@ -38,109 +34,34 @@ pub fn Home() -> impl IntoView {
 
     view! {
         <div class="page-shell">
-            <Nav />
+            <PageNav />
             <main class="page-main">
                 <section class="page-section">
-                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageHomeIntroApplication)}</p>
-                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageHomeIntroInfrastructure)}</p>
-                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageHomeIntroFoundation)}</p>
+                    <PageText label=MessageKey::HomepageHomeIntroApplication />
+                    <PageText label=MessageKey::HomepageHomeIntroInfrastructure />
+                    <PageText label=MessageKey::HomepageHomeIntroFoundation />
                 </section>
                 <section class="page-section">
-                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksHeading)}</p>
+                    <PageText label=MessageKey::HomepageHomeHowItWorksHeading />
                     <img
                         class="page-diagram"
                         src="/assets/radroots_network_graph.svg"
                         alt=i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksDiagramAlt)
                     />
-                    <p class="page-text">
-                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksStack)}</span>
-                    </p>
-                    <p class="page-text page-marker-row">
-                        <span class="page-marker">{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeMarker)}</span>
-                        <span class="page-marker-body">
-                            {notice}
-                        </span>
-                    </p>
-                    <p class="page-text">
-                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeGettingStartedBody)}</span>
-                    </p>
-                    <p class="page-text page-bullet-row">
-                        <img
-                            class="page-bullet-mark"
-                            src="/icons/lucide_asterisk.svg"
-                            alt=""
-                        />
-                        <span class="page-bullet-body">
-                            <a class="page-link page-inline-link page-plain-link" href=RADROOTS_IOS_URL>
-                                <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadIos)}" "</span>
-                                <img
-                                    class="page-inline-icon"
-                                    src="/icons/lucide_arrow_up_right.svg"
-                                    alt=""
-                                />
-                            </a>
-                        </span>
-                    </p>
-                    <p class="page-text page-bullet-row">
-                        <img
-                            class="page-bullet-mark"
-                            src="/icons/lucide_asterisk.svg"
-                            alt=""
-                        />
-                        <span class="page-bullet-body">
-                            <a class="page-link page-inline-link page-plain-link" href=RADROOTS_ANDROID_URL>
-                                <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadAndroid)}" "</span>
-                                <img
-                                    class="page-inline-icon"
-                                    src="/icons/lucide_arrow_up_right.svg"
-                                    alt=""
-                                />
-                            </a>
-                        </span>
-                    </p>
-                    <p class="page-text">
-                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeDesktopBody)}</span>
-                    </p>
-                    <p class="page-text page-bullet-row">
-                        <img
-                            class="page-bullet-mark"
-                            src="/icons/lucide_asterisk.svg"
-                            alt=""
-                        />
-                        <span class="page-bullet-body">
-                            <a class="page-link page-inline-link page-plain-link" href=RADROOTS_DESKTOP_URL>
-                                <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadDesktop)}" "</span>
-                                <img
-                                    class="page-inline-icon"
-                                    src="/icons/lucide_arrow_up_right.svg"
-                                    alt=""
-                                />
-                            </a>
-                        </span>
-                    </p>
-                    <p class="page-text">
-                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeCliBody)}</span>
-                    </p>
-                    <p class="page-text page-bullet-row">
-                        <img
-                            class="page-bullet-mark"
-                            src="/icons/lucide_asterisk.svg"
-                            alt=""
-                        />
-                        <span class="page-bullet-body">
-                            <a class="page-link page-inline-link page-plain-link" href=RADROOTS_CLI_URL>
-                                <span>{i18n::text(&i18n, MessageKey::HomepageHomeDownloadCli)}" "</span>
-                                <img
-                                    class="page-inline-icon"
-                                    src="/icons/lucide_arrow_up_right.svg"
-                                    alt=""
-                                />
-                            </a>
-                        </span>
-                    </p>
+                    <PageText label=MessageKey::HomepageHomeHowItWorksStack />
+                    <PageMarkerText marker=MessageKey::HomepageHomeHowItWorksNoticeMarker>
+                        {notice}
+                    </PageMarkerText>
+                    <PageText label=MessageKey::HomepageHomeGettingStartedBody />
+                    <PageBulletLink href=config::RADROOTS_IOS_URL label=MessageKey::HomepageHomeDownloadIos />
+                    <PageBulletLink href=config::RADROOTS_ANDROID_URL label=MessageKey::HomepageHomeDownloadAndroid />
+                    <PageText label=MessageKey::HomepageHomeDesktopBody />
+                    <PageBulletLink href=config::RADROOTS_DESKTOP_URL label=MessageKey::HomepageHomeDownloadDesktop />
+                    <PageText label=MessageKey::HomepageHomeCliBody />
+                    <PageBulletLink href=config::RADROOTS_CLI_URL label=MessageKey::HomepageHomeDownloadCli />
                 </section>
             </main>
         </div>
-        <Footer />
+        <PageFooter />
     }
 }

@@ -8,6 +8,11 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
+    --font-mono:
+        "CommitMono",
+        "SFMono-Regular",
+        Consolas,
+        monospace;
     --page-footer-height: 80px;
     --page-gutter: 24px;
     --page-inline-icon-bold-offset: 0.015em;
@@ -156,6 +161,7 @@ body {
 }
 
 .page-marker {
+    font-family: var(--font-mono);
     inset-block-start: 0;
     inset-inline-start: var(--page-marker-accent-inline-start);
     position: absolute;

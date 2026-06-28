@@ -1,4 +1,6 @@
 mod app;
+mod components;
+mod config;
 mod i18n;
 mod layout;
 mod routes;

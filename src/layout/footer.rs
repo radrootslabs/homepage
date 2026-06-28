@@ -3,7 +3,7 @@ use leptos::prelude::*;
 use crate::i18n::{self, MessageKey};
 
 #[component]
-pub fn Footer() -> impl IntoView {
+pub fn PageFooter() -> impl IntoView {
     let i18n = mf2_i18n::leptos::use_i18n();
 
     view! {

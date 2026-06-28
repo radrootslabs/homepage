@@ -1,21 +1,20 @@
 use leptos::prelude::*;
 
-use crate::i18n::{self, MessageKey};
-use crate::layout::{Footer, Nav};
+use crate::components::PageText;
+use crate::i18n::MessageKey;
+use crate::layout::{PageFooter, PageNav};
 
 #[component]
 pub fn Contact() -> impl IntoView {
-    let i18n = mf2_i18n::leptos::use_i18n();
-
     view! {
         <div class="page-shell">
-            <Nav />
+            <PageNav />
             <main class="page-main">
                 <section class="page-section">
-                    <p class="page-text">{i18n::text(&i18n, MessageKey::HomepageContactBody)}</p>
+                    <PageText label=MessageKey::HomepageContactBody />
                 </section>
             </main>
         </div>
-        <Footer />
+        <PageFooter />
     }
 }

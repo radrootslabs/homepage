@@ -21,8 +21,12 @@ fn main() {
         println!("cargo:rerun-if-env-changed={key}");
     }
 
-    dotenvy::from_path(&env_path)
-        .unwrap_or_else(|error| panic!("failed to load {}: {error}", env_path.display()));
+    if let Err(error) = dotenvy::from_path(&env_path)
+        && !error.not_found()
+    {
+        panic!("failed to load {}: {error}", env_path.display());
+    }
+
     for key in HOMEPAGE_ENV_VARS {
         let value = env::var(key).unwrap_or_else(|error| panic!("{key} must be set: {error}"));
         if value.trim().is_empty() {

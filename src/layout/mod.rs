@@ -1,5 +1,5 @@
 mod footer;
 mod nav;
 
-pub use footer::Footer;
-pub use nav::Nav;
+pub use footer::PageFooter;
+pub use nav::PageNav;
