@@ -1,6 +1,11 @@
 :root {
     --brand-brown: #4a3f2d;
     --brand-green: #5da33f;
+    --brand-accent: #F25B62;
+    --brand-graphite: #5F5C52;
+    --on-green-primary: #ffffff;
+    --on-green-hover: var(--brand-graphite);
+    --on-green-hover-underline: var(--brand-graphite);
     --font-sans:
         "Hanken Grotesk",
         system-ui,
@@ -20,7 +25,7 @@
     --page-inline-icon-hover-shift: 0.08em;
     --page-inline-icon-hover-rise: -0.08em;
     --page-inline-icon-size: 0.85em;
-    --page-ink: #ffffff;
+    --page-ink: var(--on-green-primary);
     --page-main-gap: 24px;
     --page-diagram-width: 620px;
     --page-diagram-margin-block: 16px;
@@ -134,6 +139,16 @@ body {
 
 .page-link {
     color: inherit;
+    text-decoration-color: currentColor;
+    text-underline-offset: 0.08em;
+    transition:
+        color 140ms ease-out,
+        text-decoration-color 140ms ease-out;
+}
+
+.page-link:hover {
+    color: var(--on-green-hover);
+    text-decoration-color: var(--on-green-hover-underline);
 }
 
 .page-inline-link {
@@ -145,6 +160,7 @@ body {
 }
 
 .page-plain-link:hover {
+    color: inherit;
     text-decoration: none;
 }
 
