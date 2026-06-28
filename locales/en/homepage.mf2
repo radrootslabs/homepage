@@ -20,15 +20,11 @@ home.how_it_works.stack = Radroots provides a complete application and networkin
 
 home.how_it_works.notice_marker = (!)
 
-home.how_it_works.notice_prefix = All of the source code for Radroots is
+home.how_it_works.notice = All of the source code for Radroots is { $open_source :slot } and we welcome contributions of all kinds. Whether you are a developer, farmer, or have ideas you would like to share, we encourage you to { $contact :slot } at any time.
 
 home.how_it_works.notice_open_source_label = open source
 
-home.how_it_works.notice_middle = and we welcome contributions of all kinds. Whether you are a developer, farmer, or have ideas you would like to share, we encourage you to
-
 home.how_it_works.notice_contact_label = contact us
-
-home.how_it_works.notice_suffix = at any time.
 
 home.getting_started.body = Getting started requires a computer, cell phone, or server. Radroots has runtimes available for a diverse set of architectures (IoT coming soon), but for most people the best way to get started will be to download the iOS or Android mobile apps.
 

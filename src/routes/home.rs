@@ -1,11 +1,34 @@
 use leptos::prelude::*;
+use mf2_i18n::leptos::RichTextRenderNode;
 
-use crate::i18n::{self, MessageKey};
+use crate::i18n::{self, HomepageHomeHowItWorksNoticeRichArgs, MessageKey};
 use crate::layout::{Footer, Nav};
 
 #[component]
 pub fn Home() -> impl IntoView {
     let i18n = mf2_i18n::leptos::use_i18n();
+    let notice_args = HomepageHomeHowItWorksNoticeRichArgs::new((), ());
+    let notice = i18n::rich_homepage_home_how_it_works_notice(&i18n, &notice_args)
+        .into_iter()
+        .map(|node| match node {
+            RichTextRenderNode::Text(text) => view! { <span>{text}</span> }.into_any(),
+            RichTextRenderNode::Slot { name, .. } => match name.as_str() {
+                "open_source" => view! {
+                    <a class="page-link" href="https://radroots.dev/git/">
+                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeOpenSourceLabel)}</span>
+                    </a>
+                }
+                .into_any(),
+                "contact" => view! {
+                    <a class="page-link" href="/contact">
+                        <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeContactLabel)}</span>
+                    </a>
+                }
+                .into_any(),
+                _ => unreachable!("unknown homepage notice rich text slot"),
+            },
+        })
+        .collect::<Vec<_>>();
 
     view! {
         <div class="page-shell">
@@ -29,15 +52,7 @@ pub fn Home() -> impl IntoView {
                     <p class="page-text page-marker-row">
                         <span class="page-marker">{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeMarker)}</span>
                         <span class="page-marker-body">
-                            <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticePrefix)}</span>
-                            " "
-                            <a class="page-link" href="https://radroots.dev/git/"><span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeOpenSourceLabel)}</span></a>
-                            " "
-                            <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeMiddle)}</span>
-                            " "
-                            <a class="page-link" href="/contact"><span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeContactLabel)}</span></a>
-                            " "
-                            <span>{i18n::text(&i18n, MessageKey::HomepageHomeHowItWorksNoticeSuffix)}</span>
+                            {notice}
                         </span>
                     </p>
                     <p class="page-text">
