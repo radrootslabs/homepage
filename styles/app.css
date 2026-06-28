@@ -10,9 +10,27 @@
         sans-serif;
     --page-footer-height: 80px;
     --page-gutter: 24px;
+    --page-inline-icon-bold-offset: 0.015em;
+    --page-inline-icon-gap: 0.15em;
+    --page-inline-icon-hover-shift: 0.08em;
+    --page-inline-icon-hover-rise: -0.08em;
+    --page-inline-icon-size: 0.85em;
     --page-ink: #ffffff;
+    --page-main-gap: 24px;
+    --page-diagram-width: 620px;
+    --page-diagram-margin-block: 16px;
     --page-logo-height: clamp(72px, 22vw, 85px);
     --page-logo-copy-gap: 32px;
+    --page-bullet-icon-gap: 0.25em;
+    --page-bullet-icon-offset: 0.25em;
+    --page-bullet-icon-size: 0.85em;
+    --page-marker-gap: 0.35em;
+    --page-marker-accent-inline-start: calc(
+        var(--page-marker-body-indent) - var(--page-bullet-icon-size) -
+        var(--page-bullet-icon-gap)
+    );
+    --page-marker-body-indent: calc(var(--page-marker-width) + var(--page-marker-gap));
+    --page-marker-width: 1.35em;
     --page-section-gap: 12px;
     --page-section-width: 880px;
     --page-text-line-height: 1.35;
@@ -56,11 +74,14 @@ body {
 
 .page-main {
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     inline-size: 100%;
     padding:
         var(--page-logo-copy-gap)
         var(--page-gutter)
         var(--page-gutter);
+    row-gap: var(--page-main-gap);
 }
 
 .page-section {
@@ -76,6 +97,89 @@ body {
     font-weight: var(--page-text-weight);
     line-height: var(--page-text-line-height);
     margin: 0;
+}
+
+.page-diagram {
+    block-size: auto;
+    display: block;
+    inline-size: min(100%, var(--page-diagram-width));
+    margin-block: var(--page-diagram-margin-block);
+}
+
+.page-link {
+    color: inherit;
+}
+
+.page-inline-link {
+    white-space: nowrap;
+}
+
+.page-plain-link {
+    text-decoration: none;
+}
+
+.page-plain-link:hover {
+    text-decoration: none;
+}
+
+.page-inline-icon {
+    block-size: var(--page-inline-icon-size);
+    display: inline-block;
+    filter:
+        drop-shadow(var(--page-inline-icon-bold-offset) 0 0 var(--page-ink))
+        drop-shadow(calc(var(--page-inline-icon-bold-offset) * -1) 0 0 var(--page-ink))
+        drop-shadow(0 var(--page-inline-icon-bold-offset) 0 var(--page-ink))
+        drop-shadow(0 calc(var(--page-inline-icon-bold-offset) * -1) 0 var(--page-ink));
+    inline-size: var(--page-inline-icon-size);
+    margin-inline-start: var(--page-inline-icon-gap);
+    transition: transform 160ms ease-out;
+    transform: translate(0, 0);
+    vertical-align: -0.12em;
+}
+
+.page-inline-link:hover .page-inline-icon {
+    transform:
+        translate(
+            var(--page-inline-icon-hover-shift),
+            var(--page-inline-icon-hover-rise)
+        );
+}
+
+.page-marker-row {
+    box-sizing: border-box;
+    padding-inline-start: var(--page-marker-body-indent);
+    position: relative;
+}
+
+.page-marker {
+    inset-block-start: 0;
+    inset-inline-start: var(--page-marker-accent-inline-start);
+    position: absolute;
+}
+
+.page-marker-body {
+    display: block;
+    min-inline-size: 0;
+}
+
+.page-bullet-row {
+    box-sizing: border-box;
+    padding-inline-start: var(--page-marker-body-indent);
+    position: relative;
+}
+
+.page-bullet-mark {
+    block-size: var(--page-bullet-icon-size);
+    display: block;
+    inline-size: var(--page-bullet-icon-size);
+    inset-block-start: var(--page-bullet-icon-offset);
+    inset-inline-start: var(--page-marker-accent-inline-start);
+    position: absolute;
+}
+
+.page-bullet-body {
+    display: block;
+    min-inline-size: 0;
 }
 
 .page-footer {
