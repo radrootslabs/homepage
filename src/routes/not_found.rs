@@ -1,15 +1,15 @@
 use leptos::prelude::*;
 
-use crate::components::PageText;
+use crate::components::{PageSection, PageText};
 use crate::i18n::MessageKey;
 
 #[component]
 pub fn NotFound() -> impl IntoView {
     view! {
         <main class="page-main page-main-standalone">
-            <section class="page-section">
+            <PageSection>
                 <PageText label=MessageKey::HomepageNotFoundBody />
-            </section>
+            </PageSection>
         </main>
     }
 }
