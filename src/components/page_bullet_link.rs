@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 
+use super::page_link::PageLink;
 use crate::i18n::{self, MessageKey};
 
 #[component]
@@ -14,14 +15,14 @@ pub fn PageBulletLink(href: &'static str, label: MessageKey) -> impl IntoView {
                 alt=""
             />
             <span class="page-bullet-body">
-                <a class="page-link page-inline-link page-plain-link" href=href>
+                <PageLink href=href class="page-link page-inline-link page-plain-link">
                     <span>{i18n::text(&i18n, label)}" "</span>
                     <img
                         class="page-inline-icon"
                         src="/icons/lucide_arrow_up_right.svg"
                         alt=""
                     />
-                </a>
+                </PageLink>
             </span>
         </p>
     }

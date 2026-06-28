@@ -1,6 +1,6 @@
 use leptos::prelude::*;
-use leptos_router::components::A;
 
+use super::page_link::PageLink;
 use crate::i18n::{self, MessageKey};
 
 #[component]
@@ -9,13 +9,13 @@ pub fn PageNav() -> impl IntoView {
 
     view! {
         <nav class="page-nav">
-            <A attr:class="page-logo" href="/">
+            <PageLink href="/" class="page-logo">
                 <img
                     class="page-logo-image"
                     src="/assets/radroots_logotype_white.svg"
                     alt=i18n::text(&i18n, MessageKey::HomepagePageLogoAlt)
                 />
-            </A>
+            </PageLink>
         </nav>
     }
 }
