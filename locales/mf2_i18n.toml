@@ -1,6 +1,6 @@
 version = 1
 default_locale = "en"
-locales = ["en"]
+locales = ["en", "es"]
 project_salt_path = "id_salt.txt"
 
 [[sources]]
@@ -13,7 +13,7 @@ namespace_glob = "*.mf2"
 name = "app-native"
 out_dir = "../target/mf2/native"
 module_name = "app_i18n"
-locales = ["en"]
+locales = ["en", "es"]
 namespaces = ["homepage"]
 
 [[leptos.targets]]

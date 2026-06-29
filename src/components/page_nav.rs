@@ -1,7 +1,11 @@
 use leptos::prelude::*;
 
-use super::{PageNostrKey, page_link::PageLink};
+use super::{
+    PageLocaleMenu, PageNostrKey,
+    page_link::{PageHref, PageLink},
+};
 use crate::i18n::{self, MessageKey};
+use crate::routes::RouteKey;
 
 #[component]
 pub fn PageNav() -> impl IntoView {
@@ -11,14 +15,17 @@ pub fn PageNav() -> impl IntoView {
 
     view! {
         <nav class="page-nav">
-            <PageLink href="/" class="page-logo">
+            <PageLink href=PageHref::Route(RouteKey::Home) class="page-logo">
                 <img
                     class="page-logo-image"
                     src="/assets/radroots_logotype_white.svg"
                     alt=logo_alt
                 />
             </PageLink>
-            <PageNostrKey />
+            <div class="page-nav-actions">
+                <PageNostrKey />
+                <PageLocaleMenu />
+            </div>
         </nav>
     }
 }

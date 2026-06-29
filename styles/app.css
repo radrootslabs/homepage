@@ -2,7 +2,7 @@
     --brand-brown: #4a3f2d;
     --brand-green: #5da33f;
     --brand-accent: #F25B62;
-    --brand-graphite: #5F5C52;
+    --brand-graphite: #555248;
     --on-green-primary: #ffffff;
     --on-green-hover: var(--brand-graphite);
     --on-green-hover-underline: var(--brand-graphite);
@@ -31,6 +31,15 @@
     --page-diagram-margin-block: 16px;
     --page-logo-height: clamp(72px, 22vw, 85px);
     --page-logo-copy-gap: 32px;
+    --page-locale-button-gap: 0.25em;
+    --page-locale-icon-size: 16px;
+    --page-locale-popover-gap: 6px;
+    --page-locale-popover-padding: 8px;
+    --page-locale-row-gap: 24px;
+    --page-locale-row-padding-block: 6px;
+    --page-locale-row-padding-inline: 8px;
+    --page-locale-row-width: 104px;
+    --page-nav-actions-gap: 16px;
     --page-nav-public-key-size: 12px;
     --page-nav-public-key-width: 46rem;
     --page-bullet-icon-gap: 0.25em;
@@ -87,16 +96,129 @@ body {
     inline-size: auto;
 }
 
+.page-nav-actions {
+    align-items: center;
+    display: flex;
+    gap: var(--page-nav-actions-gap);
+    margin-inline-start: var(--page-gutter);
+    min-inline-size: 0;
+}
+
 .page-nav-public-key {
     color: var(--page-ink);
     font-family: var(--font-mono);
     font-size: var(--page-nav-public-key-size);
     line-height: 1;
-    margin: 0 0 0 var(--page-gutter);
+    margin: 0;
     max-inline-size: min(46vw, var(--page-nav-public-key-width));
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.page-locale-menu {
+    display: inline-flex;
+    flex: 0 0 auto;
+}
+
+.page-locale-button {
+    align-items: center;
+    anchor-name: --page-locale-button;
+    background: transparent;
+    border: 0;
+    color: var(--page-ink);
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-size: var(--page-nav-public-key-size);
+    gap: var(--page-locale-button-gap);
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.page-locale-button:hover {
+    color: var(--on-green-hover);
+}
+
+.page-locale-chevron,
+.page-locale-check {
+    background: currentColor;
+    block-size: var(--page-locale-icon-size);
+    display: block;
+    inline-size: var(--page-locale-icon-size);
+}
+
+.page-locale-chevron {
+    -webkit-mask: url("/icons/lucide_chevron_down.svg") center / contain no-repeat;
+    mask: url("/icons/lucide_chevron_down.svg") center / contain no-repeat;
+    transition: transform 140ms ease-out;
+}
+
+.page-locale-menu:has(.page-locale-popover:popover-open) .page-locale-chevron {
+    transform: rotate(180deg);
+}
+
+.page-locale-popover {
+    background: var(--on-green-primary);
+    border: 0;
+    border-radius: 2px;
+    box-shadow: none;
+    color: var(--brand-brown);
+    font-family: var(--font-sans);
+    inset: auto;
+    margin: var(--page-locale-popover-gap) 0 0;
+    max-block-size: calc(100dvb - (var(--page-gutter) * 2));
+    max-inline-size: calc(100vw - (var(--page-gutter) * 2));
+    overflow: auto;
+    padding: var(--page-locale-popover-padding);
+    position: absolute;
+    position-anchor: --page-locale-button;
+    position-area: bottom span-left;
+    position-try-fallbacks:
+        top span-left,
+        bottom span-right,
+        top span-right;
+}
+
+.page-locale-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-locale-option {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    box-sizing: border-box;
+    color: inherit;
+    column-gap: var(--page-locale-row-gap);
+    cursor: pointer;
+    display: grid;
+    font: inherit;
+    grid-template-columns: 1fr var(--page-locale-icon-size);
+    inline-size: var(--page-locale-row-width);
+    line-height: 1;
+    margin: 0;
+    padding:
+        var(--page-locale-row-padding-block)
+        var(--page-locale-row-padding-inline);
+    text-align: start;
+}
+
+.page-locale-option:hover,
+.page-locale-option-active {
+    color: var(--brand-graphite);
+}
+
+.page-locale-check-slot {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.page-locale-check {
+    -webkit-mask: url("/icons/lucide_check.svg") center / contain no-repeat;
+    mask: url("/icons/lucide_check.svg") center / contain no-repeat;
 }
 
 .page-main {

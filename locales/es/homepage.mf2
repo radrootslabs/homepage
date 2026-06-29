@@ -1,0 +1,69 @@
+page.title = Radroots. Redes alimentarias interoperables
+
+page.logo_alt = Radroots
+
+page.footer.brand = Radroots
+
+page.footer.tagline = Personas, alimentos, planeta.
+
+home.intro.application = Radroots es una aplicación para la agricultura colaborativa que funciona en redes de protocolo abierto.
+
+home.intro.infrastructure = Las comunidades alimentarias locales a menudo dependen de infraestructura cerrada o centralizada que dificulta la creación de redes verdaderamente interoperables y de propiedad comunitaria.
+
+home.intro.foundation = Los agricultores y las comunidades alimentarias locales usan Radroots para coordinar sistemas alimentarios regionales, sabiendo que su actividad se construye sobre una base abierta.
+
+home.how_it_works.heading = - Cómo funciona -
+
+home.how_it_works.diagram_alt = Agricultores, centros alimentarios, rutas locales de alimentos, puntos de recogida, restaurantes, tiendas, familias y vecinos conectados a través de Radroots.
+
+home.network_graph.title = Red alimentaria regional de Radroots
+
+home.network_graph.farmers = Agricultores
+
+home.network_graph.food_hubs = Centros alimentarios
+
+home.network_graph.and_co_ops = y cooperativas
+
+home.network_graph.local = Rutas locales
+
+home.network_graph.food_routes = de alimentos
+
+home.network_graph.neighborhood = Puntos de recogida
+
+home.network_graph.pickup_points = vecinales
+
+home.network_graph.restaurants = Restaurantes
+
+home.network_graph.and_shops = y tiendas
+
+home.network_graph.families = Familias
+
+home.network_graph.and_neighbors = y vecinos
+
+home.how_it_works.stack = Radroots proporciona una pila completa de aplicación y red que las redes alimentarias regionales de pequeña escala pueden usar para la organización y comunicación cotidianas.
+
+home.how_it_works.notice_marker = (!)
+
+home.how_it_works.notice = Todo el código fuente de Radroots es { $open_source :slot } y damos la bienvenida a contribuciones de todo tipo. Ya seas desarrollador, agricultor o tengas ideas que quieras compartir, te animamos a { $contact :slot } en cualquier momento.
+
+home.how_it_works.notice_open_source_label = de código abierto
+
+home.how_it_works.notice_contact_label = contactarnos
+
+home.getting_started.body = Para empezar se necesita una computadora, un teléfono celular o un servidor. Radroots tiene entornos de ejecución disponibles para un conjunto diverso de arquitecturas (IoT próximamente), pero para la mayoría de las personas la mejor manera de empezar será descargar las aplicaciones móviles para iOS o Android.
+
+home.download.ios = Radroots para iOS
+
+home.download.android = Radroots para Android
+
+home.desktop.body = Quienes quieran ejecutar Radroots en su computadora de escritorio pueden descargar la aplicación de Radroots para sistemas operativos Windows, macOS y Linux.
+
+home.download.desktop = Radroots para escritorio
+
+home.cli.body = Para usuarios interesados en crear scripts con Radroots o utilizar flujos de trabajo basados en agentes, Radroots cuenta con una interfaz de línea de comandos que puede usarse de forma individual o simultáneamente con otras aplicaciones de Radroots.
+
+home.download.cli = Radroots CLI
+
+contact.body = contacto
+
+not_found.body = 404 - Página no encontrada

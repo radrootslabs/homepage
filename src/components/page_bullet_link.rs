@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-use super::page_link::PageLink;
+use super::page_link::{PageHref, PageLink};
 use crate::i18n::{self, MessageKey};
 
 #[component]
@@ -17,7 +17,7 @@ pub fn PageBulletLink(href: &'static str, label: MessageKey) -> impl IntoView {
                 alt=""
             />
             <span class="page-bullet-body">
-                <PageLink href=href class="page-link page-inline-link page-plain-link">
+                <PageLink href=PageHref::External(href) class="page-link page-inline-link page-plain-link">
                     <span>{text}" "</span>
                     <img
                         class="page-inline-icon"

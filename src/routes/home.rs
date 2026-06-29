@@ -2,11 +2,12 @@ use leptos::prelude::*;
 use mf2_i18n::leptos::RichTextRenderNode;
 
 use crate::components::{
-    PageBulletLink, PageLayout, PageMarkerText, PageNetworkGraph, PageSection, PageText,
+    PageBulletLink, PageHref, PageLayout, PageMarkerText, PageNetworkGraph, PageSection, PageText,
     PageTextLink,
 };
 use crate::config;
 use crate::i18n::{self, HomepageHomeHowItWorksNoticeRichArgs, MessageKey};
+use crate::routes::RouteKey;
 
 #[component]
 pub fn Home() -> impl IntoView {
@@ -46,11 +47,11 @@ fn HomeNotice() -> impl IntoView {
                 RichTextRenderNode::Text(text) => view! { <span>{text}</span> }.into_any(),
                 RichTextRenderNode::Slot { name, .. } => match name.as_str() {
                     "open_source" => view! {
-                        <PageTextLink href=config::RADROOTS_GIT_URL label=MessageKey::HomepageHomeHowItWorksNoticeOpenSourceLabel />
+                        <PageTextLink href=PageHref::External(config::RADROOTS_GIT_URL) label=MessageKey::HomepageHomeHowItWorksNoticeOpenSourceLabel />
                     }
                     .into_any(),
                     "contact" => view! {
-                        <PageTextLink href="/contact" label=MessageKey::HomepageHomeHowItWorksNoticeContactLabel />
+                        <PageTextLink href=PageHref::Route(RouteKey::Contact) label=MessageKey::HomepageHomeHowItWorksNoticeContactLabel />
                     }
                     .into_any(),
                     _ => unreachable!("unknown homepage notice rich text slot"),

@@ -1,29 +1,38 @@
 use leptos::prelude::*;
 use leptos_router::components::A;
 
-fn is_page_route(href: &str) -> bool {
-    href.starts_with('/') && !href.starts_with("//")
+use crate::routes::{LocalisedRouteContext, RouteKey, localised_path};
+
+#[derive(Clone, Copy)]
+pub enum PageHref {
+    Route(RouteKey),
+    External(&'static str),
 }
 
 #[component]
 pub(super) fn PageLink(
-    href: &'static str,
+    href: PageHref,
     #[prop(default = "page-link")] class: &'static str,
     children: Children,
 ) -> AnyView {
-    if is_page_route(href) {
-        view! {
-            <A attr:class=class href=href>
-                {children()}
-            </A>
+    match href {
+        PageHref::Route(key) => {
+            let route = use_context::<LocalisedRouteContext>()
+                .expect("route links should render inside a localised route");
+            let href = localised_path(key, route.locale).to_owned();
+
+            view! {
+                <A attr:class=class href=href>
+                    {children()}
+                </A>
+            }
+            .into_any()
         }
-        .into_any()
-    } else {
-        view! {
+        PageHref::External(href) => view! {
             <a class=class href=href>
                 {children()}
             </a>
         }
-        .into_any()
+        .into_any(),
     }
 }
