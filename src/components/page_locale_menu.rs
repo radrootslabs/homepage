@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_lucide_rs::{Check, ChevronDown};
 use leptos_router::{NavigateOptions, hooks::use_navigate};
 
 use crate::i18n;
@@ -23,7 +24,9 @@ pub fn PageLocaleMenu() -> impl IntoView {
                 popovertarget=POPOVER_ID
             >
                 <span>{current_locale}</span>
-                <span class="page-locale-chevron"></span>
+                <span class="page-locale-chevron">
+                    <ChevronDown />
+                </span>
             </button>
             <div
                 class="page-locale-popover"
@@ -61,7 +64,9 @@ pub fn PageLocaleMenu() -> impl IntoView {
                                     <span class="page-locale-check-slot">
                                         {move || {
                                             (check_signal.get() == option_locale).then_some(view! {
-                                                <span class="page-locale-check"></span>
+                                                <span class="page-locale-check">
+                                                    <Check />
+                                                </span>
                                             })
                                         }}
                                     </span>

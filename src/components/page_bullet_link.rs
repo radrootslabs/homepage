@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_lucide_rs::{ArrowUpRight, Asterisk};
 
 use super::page_link::{PageHref, PageLink};
 use crate::i18n::{self, MessageKey};
@@ -11,19 +12,15 @@ pub fn PageBulletLink(href: &'static str, label: MessageKey) -> impl IntoView {
 
     view! {
         <p class="page-text page-bullet-row">
-            <img
-                class="page-bullet-mark"
-                src="/icons/lucide_asterisk.svg"
-                alt=""
-            />
+            <span class="page-bullet-mark">
+                <Asterisk />
+            </span>
             <span class="page-bullet-body">
                 <PageLink href=PageHref::External(href) class="page-link page-inline-link page-plain-link">
                     <span>{text}" "</span>
-                    <img
-                        class="page-inline-icon"
-                        src="/icons/lucide_arrow_up_right.svg"
-                        alt=""
-                    />
+                    <span class="page-inline-icon">
+                        <ArrowUpRight />
+                    </span>
                 </PageLink>
             </span>
         </p>

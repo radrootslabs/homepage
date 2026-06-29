@@ -15,6 +15,7 @@ build = "build.rs"
 [dependencies]
 gloo-timers = { version = "0.3.0", features = ["futures"] }
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
+leptos-lucide-rs = { git = "https://github.com/triesap/leptos-lucide-rs.git", rev = "22529de7af2566d0508bc8ed54155f810ff6860b", version = "0.3.0" }
 leptos_router = "0.9.0-alpha"
 mf2_i18n = { git = "https://github.com/triesap/mf2_i18n.git", rev = "c0fcdcd1b3c45e49d7e36bcdd0a066dacfc2199a", version = "0.1.0", default-features = false, features = ["leptos"] }
 nostr-browser-signer = { git = "https://github.com/rust-nostr/nostr.git", rev = "e6d23719e82a50c62ecafc8569c116a3c98ce4bc", version = "0.45.0-alpha.3" }

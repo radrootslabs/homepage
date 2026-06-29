@@ -2,6 +2,7 @@
     --brand-brown: #4a3f2d;
     --brand-green: #5da33f;
     --brand-graphite: #555248;
+    --brand-graphite-light: #746F62;
     --on-green-primary: #ffffff;
     --on-green-hover: var(--brand-graphite);
     --on-green-hover-underline: var(--brand-graphite);
@@ -149,15 +150,12 @@ body {
 
 .page-locale-chevron,
 .page-locale-check {
-    background: currentColor;
     block-size: var(--page-locale-icon-size);
     display: block;
     inline-size: var(--page-locale-icon-size);
 }
 
 .page-locale-chevron {
-    -webkit-mask: url("/icons/lucide_chevron_down.svg") center / contain no-repeat;
-    mask: url("/icons/lucide_chevron_down.svg") center / contain no-repeat;
     transition: transform 140ms ease-out;
 }
 
@@ -220,11 +218,6 @@ body {
 .page-locale-check-slot {
     display: flex;
     justify-content: flex-end;
-}
-
-.page-locale-check {
-    -webkit-mask: url("/icons/lucide_check.svg") center / contain no-repeat;
-    mask: url("/icons/lucide_check.svg") center / contain no-repeat;
 }
 
 .page-main {
@@ -410,6 +403,15 @@ body {
     transition: transform 160ms ease-out;
     transform: translate(0, 0);
     vertical-align: -0.12em;
+}
+
+.page-inline-icon .lucide-icon,
+.page-bullet-mark .lucide-icon,
+.page-locale-chevron .lucide-icon,
+.page-locale-check .lucide-icon {
+    block-size: 100%;
+    display: block;
+    inline-size: 100%;
 }
 
 .page-inline-link:hover .page-inline-icon {
