@@ -227,11 +227,14 @@ fn ContactForm() -> impl IntoView {
     view! {
         <form class="page-contact-form" method="post" on:submit=on_submit novalidate>
             <label class="page-form-field" for="contact-name">
-                <span class="page-form-label">{name_label}</span>
                 <span
                     class="page-form-control"
                     class:page-form-control-error=move || name_error.get().is_some()
                 >
+                    <span class="page-form-label">
+                        {name_label}
+                        <span class="page-form-required">"*"</span>
+                    </span>
                     <input
                         id="contact-name"
                         class="page-form-input"
@@ -254,8 +257,8 @@ fn ContactForm() -> impl IntoView {
                 }}
             </label>
             <label class="page-form-field" for="contact-method">
-                <span class="page-form-label">{method_label}</span>
                 <span class="page-form-control page-form-control-select">
+                    <span class="page-form-label">{method_label}</span>
                     <select
                         id="contact-method"
                         class="page-form-input page-form-input-select"
@@ -273,11 +276,14 @@ fn ContactForm() -> impl IntoView {
                 </span>
             </label>
             <label class="page-form-field" for="contact-address">
-                <span class="page-form-label">{contact_address_label}</span>
                 <span
                     class="page-form-control"
                     class:page-form-control-error=move || contact_address_error.get().is_some()
                 >
+                    <span class="page-form-label">
+                        {contact_address_label}
+                        <span class="page-form-required">"*"</span>
+                    </span>
                     <input
                         id="contact-address"
                         class="page-form-input"
@@ -300,11 +306,14 @@ fn ContactForm() -> impl IntoView {
                 }}
             </label>
             <label class="page-form-field" for="contact-message">
-                <span class="page-form-label">{message_label}</span>
                 <span
                     class="page-form-control page-form-control-tall"
                     class:page-form-control-error=move || message_error.get().is_some()
                 >
+                    <span class="page-form-label">
+                        {message_label}
+                        <span class="page-form-required">"*"</span>
+                    </span>
                     <textarea
                         id="contact-message"
                         class="page-form-input page-form-input-textarea"

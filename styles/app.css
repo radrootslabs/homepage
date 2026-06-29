@@ -5,6 +5,7 @@
     --brand-graphite-light: #746F62;
     --brand-graphite-light-subtle: #6B685D;
     --brand-graphite-light-soft: #7A7568;
+    --brand-graphite-light-ring: rgb(122 117 104 / 42%);
     --on-green-primary: #ffffff;
     --on-green-hover: var(--brand-graphite);
     --on-green-hover-underline: var(--brand-graphite);
@@ -21,12 +22,29 @@
         Consolas,
         monospace;
     --page-footer-height: 80px;
-    --page-form-control-border-width: 2px;
-    --page-form-control-min-height: 48px;
+    --page-form-control-min-height: 96px;
+    --page-form-control-ring-width: 2px;
+    --page-form-control-y-gap: 16px;
+    --page-form-control-padding-block: var(--page-form-control-y-gap);
+    --page-form-control-padding-inline: 18px;
     --page-form-gap: 12px;
-    --page-form-input-padding-block: 10px;
-    --page-form-input-padding-inline: 12px;
-    --page-form-label-size: 16px;
+    --page-form-input-size: 20px;
+    --page-form-input-inline-offset: 4px;
+    --page-form-input-font:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    --page-form-label-font:
+        "Hanken Grotesk",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    --page-form-label-size: 20px;
+    --page-form-required-color: #ff2a1f;
     --page-form-select-icon-size: 18px;
     --page-form-width: 520px;
     --page-gutter: 24px;
@@ -277,28 +295,42 @@ body {
 }
 
 .page-form-label {
-    color: inherit;
+    color: var(--brand-graphite);
+    display: block;
+    font-family: var(--page-form-label-font);
     font-size: var(--page-form-label-size);
-    font-weight: var(--page-text-weight);
-    line-height: 1;
+    font-weight: 300;
+    line-height: 1.05;
+}
+
+.page-form-required {
+    color: var(--page-form-required-color);
+    margin-inline-start: 0.15em;
 }
 
 .page-form-control {
     background: var(--on-green-primary);
-    border: var(--page-form-control-border-width) solid var(--on-green-primary);
+    border: 0;
     border-radius: 2px;
+    box-shadow: 0 0 0 var(--page-form-control-ring-width) transparent;
     box-sizing: border-box;
     color: var(--brand-graphite);
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     min-block-size: var(--page-form-control-min-height);
+    padding:
+        var(--page-form-control-padding-block)
+        var(--page-form-control-padding-inline);
+    row-gap: var(--page-form-control-y-gap);
     transition:
-        border-color 140ms ease-out,
+        box-shadow 140ms ease-out,
         color 140ms ease-out;
 }
 
 .page-form-control:focus-within,
 .page-form-control-error {
-    border-color: var(--brand-graphite-light-soft);
+    box-shadow: 0 0 0 var(--page-form-control-ring-width) var(--brand-graphite-light-ring);
 }
 
 .page-form-input {
@@ -307,17 +339,15 @@ body {
     border: 0;
     box-sizing: border-box;
     color: inherit;
-    flex: 1 1 auto;
-    font: inherit;
-    font-size: var(--page-text-size);
-    font-weight: var(--page-text-weight);
+    flex: 0 0 auto;
+    font-family: var(--page-form-input-font);
+    font-size: var(--page-form-input-size);
+    font-weight: 400;
     inline-size: 100%;
     line-height: 1.2;
     margin: 0;
     min-inline-size: 0;
-    padding:
-        var(--page-form-input-padding-block)
-        var(--page-form-input-padding-inline);
+    padding: 0 0 0 var(--page-form-input-inline-offset);
 }
 
 .page-form-input:focus {
@@ -342,7 +372,7 @@ body {
 .page-form-input-select {
     cursor: pointer;
     padding-inline-end: calc(
-        (var(--page-form-input-padding-inline) * 2) +
+        (var(--page-form-control-padding-inline) * 2) +
         var(--page-form-select-icon-size)
     );
 }
@@ -357,7 +387,7 @@ body {
     display: block;
     inline-size: var(--page-form-select-icon-size);
     inset-block-start: 50%;
-    inset-inline-end: var(--page-form-input-padding-inline);
+    inset-inline-end: var(--page-form-control-padding-inline);
     pointer-events: none;
     position: absolute;
     transform: translateY(-50%);
@@ -370,20 +400,22 @@ body {
 }
 
 .page-form-control-tall {
-    min-block-size: 148px;
+    min-block-size: 256px;
 }
 
 .page-form-input-textarea {
     block-size: auto;
-    min-block-size: 144px;
+    flex: 1 1 auto;
+    min-block-size: 200px;
     resize: vertical;
 }
 
 .page-form-submit {
     align-items: center;
     background: var(--on-green-primary);
-    border: var(--page-form-control-border-width) solid var(--on-green-primary);
+    border: 0;
     border-radius: 2px;
+    box-shadow: 0 0 0 var(--page-form-control-ring-width) transparent;
     color: var(--brand-brown);
     cursor: pointer;
     display: flex;
@@ -394,17 +426,17 @@ body {
     line-height: 1;
     min-block-size: var(--page-form-control-min-height);
     padding:
-        var(--page-form-input-padding-block)
-        var(--page-form-input-padding-inline);
+        var(--page-form-control-padding-block)
+        var(--page-form-control-padding-inline);
     text-align: center;
     transition:
-        border-color 140ms ease-out,
+        box-shadow 140ms ease-out,
         color 140ms ease-out;
 }
 
 .page-form-submit:hover,
 .page-form-submit:focus-visible {
-    border-color: var(--brand-graphite);
+    box-shadow: 0 0 0 var(--page-form-control-ring-width) var(--brand-graphite-light-ring);
 }
 
 .page-form-submit:focus-visible {
