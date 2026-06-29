@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-use crate::nostr::browser;
+use crate::features::nostr::browser;
 
 #[component]
 pub fn PageNostrKey() -> impl IntoView {

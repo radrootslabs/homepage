@@ -92,6 +92,8 @@ contact.form.validation.email_invalid = Ingresa un correo electrónico válido.
 
 contact.form.validation.public_key_required = Ingresa tu clave pública.
 
+contact.form.validation.public_key_invalid = Ingresa una clave pública hexadecimal de 64 caracteres.
+
 contact.form.validation.message_required = Ingresa un mensaje.
 
 contact.form.status.accepted = Mensaje enviado. Te responderemos pronto.

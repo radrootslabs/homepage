@@ -3,10 +3,10 @@ use leptos_lucide_rs::ChevronsUpDown;
 
 use crate::components::{PageLayout, PageLoader, PageSection, PageText};
 use crate::config;
-use crate::i18n::{self, MessageKey};
-use crate::support_contact::{
-    SupportContactSubmitResult, SupportContactValues, submit_support_contact,
+use crate::features::contact::submission::{
+    ContactRejection, ContactSubmitResult, ContactValues, submit_contact,
 };
+use crate::i18n::{self, MessageKey};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum ContactMethod {
@@ -40,6 +40,19 @@ enum ContactSubmitState {
     Error,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum ContactFormField {
+    Name,
+    ContactAddress,
+    Message,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct ContactServerError {
+    field: ContactFormField,
+    key: MessageKey,
+}
+
 #[component]
 pub fn Contact() -> impl IntoView {
     view! {
@@ -62,6 +75,7 @@ fn ContactForm() -> impl IntoView {
     let (contact_method, set_contact_method) = signal(ContactMethod::Email);
     let (submitted, set_submitted) = signal(false);
     let (submit_state, set_submit_state) = signal(ContactSubmitState::Idle);
+    let (server_error, set_server_error) = signal(None::<ContactServerError>);
     let locale = i18n.locale_signal();
     let name_i18n = i18n.clone();
     let name_label = move || i18n::text(&name_i18n, MessageKey::HomepageContactFormNameLabel);
@@ -125,6 +139,7 @@ fn ContactForm() -> impl IntoView {
             submitted.get(),
             MessageKey::HomepageContactFormValidationNameRequired,
         )
+        .or_else(|| field_error(server_error.get(), ContactFormField::Name))
     });
     let contact_address_error = Signal::derive(move || {
         let contact_address = contact_address.get();
@@ -146,7 +161,11 @@ fn ContactForm() -> impl IntoView {
             return Some(MessageKey::HomepageContactFormValidationEmailInvalid);
         }
 
-        None
+        if submitted && method == ContactMethod::Nostr && !is_valid_nostr_pubkey(&contact_address) {
+            return Some(MessageKey::HomepageContactFormValidationPublicKeyInvalid);
+        }
+
+        field_error(server_error.get(), ContactFormField::ContactAddress)
     });
     let message_error = Signal::derive(move || {
         required_error(
@@ -154,6 +173,7 @@ fn ContactForm() -> impl IntoView {
             submitted.get(),
             MessageKey::HomepageContactFormValidationMessageRequired,
         )
+        .or_else(|| field_error(server_error.get(), ContactFormField::Message))
     });
     let form_has_errors = move || {
         name_error.get().is_some()
@@ -164,19 +184,21 @@ fn ContactForm() -> impl IntoView {
         if let Some(method) = ContactMethod::from_value(&event_target_value(&event)) {
             set_contact_method.set(method);
             set_submit_state.set(ContactSubmitState::Idle);
+            set_server_error.set(None);
         }
     };
     let on_submit = move |event: SubmitEvent| {
         event.prevent_default();
         set_submitted.set(true);
         set_submit_state.set(ContactSubmitState::Idle);
+        set_server_error.set(None);
 
         if form_has_errors() {
             return;
         }
 
         set_submit_state.set(ContactSubmitState::Sending);
-        let values = SupportContactValues {
+        let values = ContactValues {
             display_name: name.get_untracked(),
             outreach_method: contact_method.get_untracked().value().to_owned(),
             contact_address: contact_address.get_untracked(),
@@ -185,14 +207,19 @@ fn ContactForm() -> impl IntoView {
         let locale = locale.get_untracked();
 
         spawn_local(async move {
-            let result =
-                submit_support_contact(config::RADROOTS_SUPPORT_CONTACT_URL, values, locale).await;
+            let result = submit_contact(config::RADROOTS_CONTACT_URL, values, locale).await;
             set_submit_state.set(match result {
-                SupportContactSubmitResult::Accepted => ContactSubmitState::Accepted,
-                SupportContactSubmitResult::Duplicate => ContactSubmitState::Duplicate,
-                SupportContactSubmitResult::Rejected | SupportContactSubmitResult::Unavailable => {
-                    ContactSubmitState::Error
+                ContactSubmitResult::Accepted => ContactSubmitState::Accepted,
+                ContactSubmitResult::Duplicate => ContactSubmitState::Duplicate,
+                ContactSubmitResult::Rejected(rejection) => {
+                    if let Some(error) = contact_server_error(&rejection) {
+                        set_server_error.set(Some(error));
+                        ContactSubmitState::Idle
+                    } else {
+                        ContactSubmitState::Error
+                    }
                 }
+                ContactSubmitResult::Unavailable => ContactSubmitState::Error,
             });
         });
     };
@@ -216,6 +243,7 @@ fn ContactForm() -> impl IntoView {
                         on:input=move |event| {
                             set_name.set(event_target_value(&event));
                             set_submit_state.set(ContactSubmitState::Idle);
+                            set_server_error.set(None);
                         }
                     />
                 </span>
@@ -261,6 +289,7 @@ fn ContactForm() -> impl IntoView {
                         on:input=move |event| {
                             set_contact_address.set(event_target_value(&event));
                             set_submit_state.set(ContactSubmitState::Idle);
+                            set_server_error.set(None);
                         }
                     />
                 </span>
@@ -286,6 +315,7 @@ fn ContactForm() -> impl IntoView {
                         on:input=move |event| {
                             set_message.set(event_target_value(&event));
                             set_submit_state.set(ContactSubmitState::Idle);
+                            set_server_error.set(None);
                         }
                     ></textarea>
                 </span>
@@ -322,6 +352,12 @@ fn required_error(value: &str, submitted: bool, key: MessageKey) -> Option<Messa
     (submitted && value.trim().is_empty()).then_some(key)
 }
 
+fn field_error(error: Option<ContactServerError>, field: ContactFormField) -> Option<MessageKey> {
+    error
+        .filter(|error| error.field == field)
+        .map(|error| error.key)
+}
+
 fn is_valid_email(value: &str) -> bool {
     let value = value.trim();
     let Some((local, domain)) = value.split_once('@') else {
@@ -329,4 +365,42 @@ fn is_valid_email(value: &str) -> bool {
     };
 
     !local.is_empty() && domain.contains('.') && !domain.starts_with('.') && !domain.ends_with('.')
+}
+
+fn is_valid_nostr_pubkey(value: &str) -> bool {
+    let value = value.trim();
+    value.len() == 64 && value.bytes().all(|byte| byte.is_ascii_hexdigit())
+}
+
+fn contact_server_error(rejection: &ContactRejection) -> Option<ContactServerError> {
+    let field = rejection.field.as_deref()?;
+    let message = rejection.message.as_deref();
+    let field = match field {
+        "identity.display_name" => ContactFormField::Name,
+        "identity.email" | "identity.nostr" => ContactFormField::ContactAddress,
+        "message" => ContactFormField::Message,
+        _ => return None,
+    };
+    let key = match message {
+        Some("errors.body.email_required") => {
+            MessageKey::HomepageContactFormValidationEmailRequired
+        }
+        Some("errors.body.email_invalid") => MessageKey::HomepageContactFormValidationEmailInvalid,
+        Some("errors.body.nostr_required") => {
+            MessageKey::HomepageContactFormValidationPublicKeyRequired
+        }
+        Some("errors.body.nostr_invalid") => {
+            MessageKey::HomepageContactFormValidationPublicKeyInvalid
+        }
+        Some("errors.body.required") => match field {
+            ContactFormField::Name => MessageKey::HomepageContactFormValidationNameRequired,
+            ContactFormField::ContactAddress => {
+                MessageKey::HomepageContactFormValidationPublicKeyRequired
+            }
+            ContactFormField::Message => MessageKey::HomepageContactFormValidationMessageRequired,
+        },
+        _ => return None,
+    };
+
+    Some(ContactServerError { field, key })
 }

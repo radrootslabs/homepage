@@ -66,7 +66,7 @@ home.download.cli = Radroots CLI
 
 contact.heading = - Contact -
 
-contact.body = Tell us what you need, how you want to hear back, and the support route that fits best.
+contact.body = Tell us what you need and how you want to hear back.
 
 contact.form.name_label = Name
 
@@ -91,6 +91,8 @@ contact.form.validation.email_required = Enter your email address.
 contact.form.validation.email_invalid = Enter a valid email address.
 
 contact.form.validation.public_key_required = Enter your public key.
+
+contact.form.validation.public_key_invalid = Enter a 64-character hex public key.
 
 contact.form.validation.message_required = Enter a message.
 
