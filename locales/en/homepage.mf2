@@ -64,6 +64,24 @@ home.cli.body = For users interested in scripting with Radroots, or using agenti
 
 home.download.cli = Radroots CLI
 
-contact.body = contact
+contact.heading = - Contact -
+
+contact.body = Tell us what you need, how you want to hear back, and the support route that fits best.
+
+contact.form.name_label = Name
+
+contact.form.reply_method_label = Contact
+
+contact.form.reply_method.email = Email
+
+contact.form.reply_method.nostr = Nostr
+
+contact.form.email_label = Email
+
+contact.form.public_key_label = Public key
+
+contact.form.message_label = How can we help?
+
+contact.form.submit = Send message
 
 not_found.body = 404 - No page

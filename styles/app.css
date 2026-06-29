@@ -1,7 +1,6 @@
 :root {
     --brand-brown: #4a3f2d;
     --brand-green: #5da33f;
-    --brand-accent: #F25B62;
     --brand-graphite: #555248;
     --on-green-primary: #ffffff;
     --on-green-hover: var(--brand-graphite);
@@ -19,6 +18,13 @@
         Consolas,
         monospace;
     --page-footer-height: 80px;
+    --page-form-control-border-width: 2px;
+    --page-form-control-min-height: 48px;
+    --page-form-gap: 12px;
+    --page-form-input-padding-block: 10px;
+    --page-form-input-padding-inline: 12px;
+    --page-form-label-size: 16px;
+    --page-form-width: 520px;
     --page-gutter: 24px;
     --page-inline-icon-bold-offset: 0.015em;
     --page-inline-icon-gap: 0.15em;
@@ -257,6 +263,111 @@ body {
     display: block;
     inline-size: min(100%, var(--page-diagram-width));
     margin-block: var(--page-diagram-margin-block);
+}
+
+.page-contact-form {
+    display: flex;
+    flex-direction: column;
+    inline-size: min(100%, var(--page-form-width));
+    row-gap: var(--page-form-gap);
+}
+
+.page-form-field {
+    color: var(--page-ink);
+    display: flex;
+    flex-direction: column;
+    row-gap: calc(var(--page-form-gap) / 2);
+}
+
+.page-form-label {
+    color: inherit;
+    font-size: var(--page-form-label-size);
+    font-weight: var(--page-text-weight);
+    line-height: 1;
+}
+
+.page-form-control {
+    background: var(--on-green-primary);
+    border: var(--page-form-control-border-width) solid var(--on-green-primary);
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: var(--brand-brown);
+    display: flex;
+    min-block-size: var(--page-form-control-min-height);
+    transition:
+        border-color 140ms ease-out,
+        color 140ms ease-out;
+}
+
+.page-form-control:focus-within,
+.page-form-control-error {
+    border-color: var(--brand-graphite);
+}
+
+.page-form-input {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    box-sizing: border-box;
+    color: inherit;
+    flex: 1 1 auto;
+    font: inherit;
+    font-size: var(--page-text-size);
+    font-weight: var(--page-text-weight);
+    inline-size: 100%;
+    line-height: 1.2;
+    margin: 0;
+    min-inline-size: 0;
+    padding:
+        var(--page-form-input-padding-block)
+        var(--page-form-input-padding-inline);
+}
+
+.page-form-input:focus {
+    outline: 0;
+}
+
+.page-form-input-select {
+    cursor: pointer;
+}
+
+.page-form-control-tall {
+    min-block-size: 148px;
+}
+
+.page-form-input-textarea {
+    block-size: auto;
+    min-block-size: 144px;
+    resize: vertical;
+}
+
+.page-form-submit {
+    background: var(--on-green-primary);
+    border: var(--page-form-control-border-width) solid var(--on-green-primary);
+    border-radius: 2px;
+    color: var(--brand-brown);
+    cursor: pointer;
+    font: inherit;
+    font-size: var(--page-text-size);
+    font-weight: var(--page-text-weight);
+    line-height: 1;
+    min-block-size: var(--page-form-control-min-height);
+    padding:
+        var(--page-form-input-padding-block)
+        var(--page-form-input-padding-inline);
+    text-align: center;
+    transition:
+        border-color 140ms ease-out,
+        color 140ms ease-out;
+}
+
+.page-form-submit:hover,
+.page-form-submit:focus-visible {
+    border-color: var(--brand-graphite);
+}
+
+.page-form-submit:focus-visible {
+    outline: 0;
 }
 
 .page-link {

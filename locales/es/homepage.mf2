@@ -64,6 +64,24 @@ home.cli.body = Para usuarios interesados en crear scripts con Radroots o utiliz
 
 home.download.cli = Radroots CLI
 
-contact.body = contacto
+contact.heading = - Contacto -
+
+contact.body = Cuéntanos qué necesitas, cómo quieres que te respondamos y qué vía de soporte prefieres.
+
+contact.form.name_label = Nombre
+
+contact.form.reply_method_label = Contacto
+
+contact.form.reply_method.email = Correo electrónico
+
+contact.form.reply_method.nostr = Nostr
+
+contact.form.email_label = Correo electrónico
+
+contact.form.public_key_label = Clave pública
+
+contact.form.message_label = ¿Cómo podemos ayudarte?
+
+contact.form.submit = Enviar mensaje
 
 not_found.body = 404 - Página no encontrada
