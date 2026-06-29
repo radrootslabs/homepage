@@ -80,6 +80,8 @@ contact.form.email_label = Correo electrónico
 
 contact.form.public_key_label = Clave pública
 
+contact.form.use_browser_signer = Usar firmador del navegador
+
 contact.form.message_label = ¿Cómo podemos ayudarte?
 
 contact.form.submit = Enviar mensaje

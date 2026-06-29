@@ -80,6 +80,8 @@ contact.form.email_label = Email
 
 contact.form.public_key_label = Public key
 
+contact.form.use_browser_signer = Use browser signer
+
 contact.form.message_label = How can we help?
 
 contact.form.submit = Send message

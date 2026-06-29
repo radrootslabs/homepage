@@ -5,7 +5,7 @@
     --brand-graphite-light: #746F62;
     --brand-graphite-light-subtle: #6B685D;
     --brand-graphite-light-soft: #7A7568;
-    --brand-graphite-light-ring: rgb(122 117 104 / 42%);
+    --brand-ios-blue: #007aff;
     --on-green-primary: #ffffff;
     --on-green-hover: var(--brand-graphite);
     --on-green-hover-underline: var(--brand-graphite);
@@ -22,14 +22,11 @@
         Consolas,
         monospace;
     --page-footer-height: 80px;
-    --page-form-control-min-height: 96px;
-    --page-form-control-ring-width: 2px;
-    --page-form-control-y-gap: 16px;
-    --page-form-control-padding-block: var(--page-form-control-y-gap);
-    --page-form-control-padding-inline: 18px;
-    --page-form-gap: 12px;
+    --page-form-control-min-height: 88px;
+    --page-form-control-padding-block: 16px;
+    --page-form-control-padding-inline: 20px;
+    --page-form-gap: 24px;
     --page-form-input-size: 20px;
-    --page-form-input-inline-offset: 4px;
     --page-form-input-font:
         system-ui,
         -apple-system,
@@ -44,8 +41,14 @@
         "Segoe UI",
         sans-serif;
     --page-form-label-size: 20px;
+    --page-form-label-row-gap: 10px;
+    --page-form-inline-action-gap: 0.25em;
+    --page-form-inline-action-size: 18px;
+    --page-form-inline-icon-size: 0.9em;
     --page-form-required-color: #ff2a1f;
     --page-form-select-icon-size: 18px;
+    --page-form-submit-min-height: 72px;
+    --page-form-textarea-min-height: 420px;
     --page-form-width: 520px;
     --page-gutter: 24px;
     --page-inline-icon-bold-offset: 0.015em;
@@ -280,10 +283,29 @@ body {
     margin-block: var(--page-diagram-margin-block);
 }
 
+.page-contact-section {
+    align-items: start;
+    display: grid;
+    gap: var(--page-main-gap);
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, var(--page-form-width));
+    inline-size: 100%;
+}
+
+.page-contact-shell {
+    inline-size: 100%;
+}
+
+.page-contact-copy {
+    min-inline-size: 0;
+}
+
 .page-contact-form {
     display: flex;
     flex-direction: column;
     inline-size: min(100%, var(--page-form-width));
+    justify-self: end;
     row-gap: var(--page-form-gap);
 }
 
@@ -291,7 +313,7 @@ body {
     color: var(--page-ink);
     display: flex;
     flex-direction: column;
-    row-gap: calc(var(--page-form-gap) / 2);
+    row-gap: 8px;
 }
 
 .page-form-label {
@@ -303,34 +325,68 @@ body {
     line-height: 1.05;
 }
 
+.page-form-label-row {
+    align-items: baseline;
+    column-gap: var(--page-form-label-row-gap);
+    display: flex;
+    flex-wrap: wrap;
+    min-inline-size: 0;
+}
+
 .page-form-required {
     color: var(--page-form-required-color);
     margin-inline-start: 0.15em;
+}
+
+.page-form-inline-action {
+    align-items: center;
+    animation: page-form-fade-in 180ms ease-out both;
+    background: transparent;
+    border: 0;
+    color: var(--brand-ios-blue);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--page-form-label-font);
+    font-size: var(--page-form-inline-action-size);
+    font-weight: 300;
+    gap: var(--page-form-inline-action-gap);
+    line-height: 1.05;
+    margin: 0;
+    padding: 0;
+}
+
+.page-form-inline-action .lucide-icon {
+    block-size: var(--page-form-inline-icon-size);
+    display: block;
+    inline-size: var(--page-form-inline-icon-size);
+}
+
+.page-form-inline-action:disabled {
+    cursor: wait;
+}
+
+.page-form-inline-action:focus-visible {
+    outline: 0;
+}
+
+.page-form-inline-action:hover {
+    text-decoration: none;
 }
 
 .page-form-control {
     background: var(--on-green-primary);
     border: 0;
     border-radius: 2px;
-    box-shadow: 0 0 0 var(--page-form-control-ring-width) transparent;
     box-sizing: border-box;
     color: var(--brand-graphite);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
     min-block-size: var(--page-form-control-min-height);
+    min-inline-size: 0;
     padding:
         var(--page-form-control-padding-block)
         var(--page-form-control-padding-inline);
-    row-gap: var(--page-form-control-y-gap);
-    transition:
-        box-shadow 140ms ease-out,
-        color 140ms ease-out;
-}
-
-.page-form-control:focus-within,
-.page-form-control-error {
-    box-shadow: 0 0 0 var(--page-form-control-ring-width) var(--brand-graphite-light-ring);
+    position: relative;
 }
 
 .page-form-input {
@@ -339,15 +395,16 @@ body {
     border: 0;
     box-sizing: border-box;
     color: inherit;
-    flex: 0 0 auto;
+    display: block;
     font-family: var(--page-form-input-font);
     font-size: var(--page-form-input-size);
-    font-weight: 400;
+    font-weight: 300;
     inline-size: 100%;
     line-height: 1.2;
     margin: 0;
     min-inline-size: 0;
-    padding: 0 0 0 var(--page-form-input-inline-offset);
+    padding: 0;
+    place-self: end stretch;
 }
 
 .page-form-input:focus {
@@ -377,6 +434,17 @@ body {
     );
 }
 
+.page-form-select-row {
+    display: block;
+    min-inline-size: 0;
+    place-self: end stretch;
+}
+
+.page-form-select-row .page-form-input-select {
+    inline-size: 100%;
+    place-self: auto;
+}
+
 .page-form-control-select {
     position: relative;
 }
@@ -400,13 +468,12 @@ body {
 }
 
 .page-form-control-tall {
-    min-block-size: 256px;
+    min-block-size: var(--page-form-textarea-min-height);
 }
 
 .page-form-input-textarea {
-    block-size: auto;
-    flex: 1 1 auto;
-    min-block-size: 200px;
+    min-block-size: 0;
+    place-self: stretch;
     resize: vertical;
 }
 
@@ -415,7 +482,6 @@ body {
     background: var(--on-green-primary);
     border: 0;
     border-radius: 2px;
-    box-shadow: 0 0 0 var(--page-form-control-ring-width) transparent;
     color: var(--brand-brown);
     cursor: pointer;
     display: flex;
@@ -424,19 +490,11 @@ body {
     font-size: var(--page-text-size);
     font-weight: var(--page-text-weight);
     line-height: 1;
-    min-block-size: var(--page-form-control-min-height);
+    min-block-size: var(--page-form-submit-min-height);
     padding:
-        var(--page-form-control-padding-block)
+        16px
         var(--page-form-control-padding-inline);
     text-align: center;
-    transition:
-        box-shadow 140ms ease-out,
-        color 140ms ease-out;
-}
-
-.page-form-submit:hover,
-.page-form-submit:focus-visible {
-    box-shadow: 0 0 0 var(--page-form-control-ring-width) var(--brand-graphite-light-ring);
 }
 
 .page-form-submit:focus-visible {
@@ -464,6 +522,16 @@ body {
 @keyframes page-loader-spin {
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes page-form-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 

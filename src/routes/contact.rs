@@ -1,11 +1,12 @@
 use leptos::{ev::SubmitEvent, prelude::*, task::spawn_local};
-use leptos_lucide_rs::ChevronsUpDown;
+use leptos_lucide_rs::{ChevronsUpDown, Key};
 
-use crate::components::{PageLayout, PageLoader, PageSection, PageText};
+use crate::components::{PageLayout, PageLoader, PageText};
 use crate::config;
 use crate::features::contact::submission::{
     ContactRejection, ContactSubmitResult, ContactValues, submit_contact,
 };
+use crate::features::nostr::browser;
 use crate::i18n::{self, MessageKey};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -57,11 +58,14 @@ struct ContactServerError {
 pub fn Contact() -> impl IntoView {
     view! {
         <PageLayout>
-            <PageSection>
-                <PageText label=MessageKey::HomepageContactHeading />
-                <PageText label=MessageKey::HomepageContactBody />
-                <ContactForm />
-            </PageSection>
+            <section class="page-section page-contact-shell">
+                <div class="page-contact-section">
+                    <div class="page-contact-copy">
+                        <PageText label=MessageKey::HomepageContactBody />
+                    </div>
+                    <ContactForm />
+                </div>
+            </section>
         </PageLayout>
     }
 }
@@ -97,10 +101,12 @@ fn ContactForm() -> impl IntoView {
     let message_label =
         move || i18n::text(&message_i18n, MessageKey::HomepageContactFormMessageLabel);
     let submit_i18n = i18n.clone();
+    let browser_signer_i18n = i18n.clone();
     let name_error_i18n = i18n.clone();
     let address_error_i18n = i18n.clone();
     let message_error_i18n = i18n.clone();
     let submit_status_i18n = i18n.clone();
+    let browser_public_key = LocalResource::new(browser::load_public_key);
     let submit_status = move || {
         let key = match submit_state.get() {
             ContactSubmitState::Idle | ContactSubmitState::Sending => return None,
@@ -182,6 +188,9 @@ fn ContactForm() -> impl IntoView {
     };
     let handle_method_change = move |event| {
         if let Some(method) = ContactMethod::from_value(&event_target_value(&event)) {
+            if contact_method.get_untracked() != method {
+                set_contact_address.set(String::new());
+            }
             set_contact_method.set(method);
             set_submit_state.set(ContactSubmitState::Idle);
             set_server_error.set(None);
@@ -226,15 +235,15 @@ fn ContactForm() -> impl IntoView {
 
     view! {
         <form class="page-contact-form" method="post" on:submit=on_submit novalidate>
-            <label class="page-form-field" for="contact-name">
+            <div class="page-form-field">
                 <span
                     class="page-form-control"
                     class:page-form-control-error=move || name_error.get().is_some()
                 >
-                    <span class="page-form-label">
+                    <label class="page-form-label" for="contact-name">
                         {name_label}
                         <span class="page-form-required">"*"</span>
-                    </span>
+                    </label>
                     <input
                         id="contact-name"
                         class="page-form-input"
@@ -255,34 +264,72 @@ fn ContactForm() -> impl IntoView {
                         <span class="page-form-error">{i18n::text(&name_error_i18n, key)}</span>
                     })
                 }}
-            </label>
-            <label class="page-form-field" for="contact-method">
+            </div>
+            <div class="page-form-field">
                 <span class="page-form-control page-form-control-select">
-                    <span class="page-form-label">{method_label}</span>
-                    <select
-                        id="contact-method"
-                        class="page-form-input page-form-input-select"
-                        name="outreach_method"
-                        disabled=move || submit_state.get() == ContactSubmitState::Sending
-                        prop:value=move || contact_method.get().value()
-                        on:change=handle_method_change
-                    >
-                        <option value="email">{email_label}</option>
-                        <option value="nostr">{nostr_label}</option>
-                    </select>
+                    <span class="page-form-label-row">
+                        <label class="page-form-label" for="contact-method">{method_label}</label>
+                        {move || {
+                            if contact_method.get() != ContactMethod::Nostr {
+                                return None;
+                            }
+
+                            browser_public_key
+                                .get()
+                                .flatten()
+                                .filter(|public_key| is_valid_nostr_pubkey(public_key))
+                                .map(|public_key| {
+                                    let button_label = i18n::text(
+                                        &browser_signer_i18n,
+                                        MessageKey::HomepageContactFormUseBrowserSigner,
+                                    );
+
+                                    view! {
+                                        <button
+                                            class="page-form-inline-action"
+                                            type="button"
+                                            disabled=move || submit_state.get() == ContactSubmitState::Sending
+                                            on:click=move |_| {
+                                                set_contact_address.set(public_key.clone());
+                                                set_submit_state.set(ContactSubmitState::Idle);
+                                                set_server_error.set(None);
+                                            }
+                                        >
+                                            <span>{button_label}</span>
+                                            <Key />
+                                        </button>
+                                    }
+                                })
+                        }}
+                    </span>
+                    <span class="page-form-select-row">
+                        <select
+                            id="contact-method"
+                            class="page-form-input page-form-input-select"
+                            name="outreach_method"
+                            disabled=move || submit_state.get() == ContactSubmitState::Sending
+                            prop:value=move || contact_method.get().value()
+                            on:change=handle_method_change
+                        >
+                            <option value="email">{email_label}</option>
+                            <option value="nostr">{nostr_label}</option>
+                        </select>
+                    </span>
                     <span class="page-form-select-icon">
                         <ChevronsUpDown />
                     </span>
                 </span>
-            </label>
-            <label class="page-form-field" for="contact-address">
+            </div>
+            <div class="page-form-field">
                 <span
                     class="page-form-control"
                     class:page-form-control-error=move || contact_address_error.get().is_some()
                 >
-                    <span class="page-form-label">
-                        {contact_address_label}
-                        <span class="page-form-required">"*"</span>
+                    <span class="page-form-label-row">
+                        <label class="page-form-label" for="contact-address">
+                            {contact_address_label}
+                            <span class="page-form-required">"*"</span>
+                        </label>
                     </span>
                     <input
                         id="contact-address"
@@ -304,16 +351,16 @@ fn ContactForm() -> impl IntoView {
                         <span class="page-form-error">{i18n::text(&address_error_i18n, key)}</span>
                     })
                 }}
-            </label>
-            <label class="page-form-field" for="contact-message">
+            </div>
+            <div class="page-form-field">
                 <span
                     class="page-form-control page-form-control-tall"
                     class:page-form-control-error=move || message_error.get().is_some()
                 >
-                    <span class="page-form-label">
+                    <label class="page-form-label" for="contact-message">
                         {message_label}
                         <span class="page-form-required">"*"</span>
-                    </span>
+                    </label>
                     <textarea
                         id="contact-message"
                         class="page-form-input page-form-input-textarea"
@@ -333,7 +380,7 @@ fn ContactForm() -> impl IntoView {
                         <span class="page-form-error">{i18n::text(&message_error_i18n, key)}</span>
                     })
                 }}
-            </label>
+            </div>
             {move || {
                 submit_status().map(|status| view! {
                     <p class="page-form-status">{status}</p>
