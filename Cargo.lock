@@ -1919,12 +1919,16 @@ name = "radroots_homepage"
 version = "0.1.0"
 dependencies = [
  "dotenvy",
+ "gloo-net",
  "gloo-timers",
+ "js-sys",
  "leptos",
  "leptos-lucide-rs",
  "leptos_router",
  "mf2_i18n",
  "nostr-browser-signer",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

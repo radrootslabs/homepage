@@ -49,6 +49,7 @@
     --page-locale-row-padding-block: 6px;
     --page-locale-row-padding-inline: 8px;
     --page-locale-row-width: 104px;
+    --page-loader-size: 22px;
     --page-nav-actions-gap: 16px;
     --page-nav-public-key-size: 12px;
     --page-nav-public-key-width: 46rem;
@@ -330,6 +331,14 @@ body {
     line-height: 1.2;
 }
 
+.page-form-status {
+    color: var(--page-ink);
+    font-size: var(--page-form-label-size);
+    font-weight: var(--page-text-weight);
+    line-height: 1.2;
+    margin: 0;
+}
+
 .page-form-input-select {
     cursor: pointer;
     padding-inline-end: calc(
@@ -371,11 +380,14 @@ body {
 }
 
 .page-form-submit {
+    align-items: center;
     background: var(--on-green-primary);
     border: var(--page-form-control-border-width) solid var(--on-green-primary);
     border-radius: 2px;
     color: var(--brand-brown);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
     font: inherit;
     font-size: var(--page-text-size);
     font-weight: var(--page-text-weight);
@@ -397,6 +409,30 @@ body {
 
 .page-form-submit:focus-visible {
     outline: 0;
+}
+
+.page-form-submit:disabled {
+    cursor: wait;
+}
+
+.page-loader {
+    animation: page-loader-spin 1600ms linear infinite;
+    block-size: var(--page-loader-size);
+    color: currentColor;
+    display: block;
+    inline-size: var(--page-loader-size);
+}
+
+.page-loader .lucide-icon {
+    block-size: 100%;
+    display: block;
+    inline-size: 100%;
+}
+
+@keyframes page-loader-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .page-link {

@@ -1,8 +1,12 @@
-use leptos::{ev::SubmitEvent, prelude::*};
+use leptos::{ev::SubmitEvent, prelude::*, task::spawn_local};
 use leptos_lucide_rs::ChevronsUpDown;
 
-use crate::components::{PageLayout, PageSection, PageText};
+use crate::components::{PageLayout, PageLoader, PageSection, PageText};
+use crate::config;
 use crate::i18n::{self, MessageKey};
+use crate::support_contact::{
+    SupportContactSubmitResult, SupportContactValues, submit_support_contact,
+};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum ContactMethod {
@@ -27,6 +31,15 @@ impl ContactMethod {
     }
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum ContactSubmitState {
+    Idle,
+    Sending,
+    Accepted,
+    Duplicate,
+    Error,
+}
+
 #[component]
 pub fn Contact() -> impl IntoView {
     view! {
@@ -48,6 +61,8 @@ fn ContactForm() -> impl IntoView {
     let (message, set_message) = signal(String::new());
     let (contact_method, set_contact_method) = signal(ContactMethod::Email);
     let (submitted, set_submitted) = signal(false);
+    let (submit_state, set_submit_state) = signal(ContactSubmitState::Idle);
+    let locale = i18n.locale_signal();
     let name_i18n = i18n.clone();
     let name_label = move || i18n::text(&name_i18n, MessageKey::HomepageContactFormNameLabel);
     let method_i18n = i18n.clone();
@@ -68,10 +83,20 @@ fn ContactForm() -> impl IntoView {
     let message_label =
         move || i18n::text(&message_i18n, MessageKey::HomepageContactFormMessageLabel);
     let submit_i18n = i18n.clone();
-    let submit_label = move || i18n::text(&submit_i18n, MessageKey::HomepageContactFormSubmit);
     let name_error_i18n = i18n.clone();
     let address_error_i18n = i18n.clone();
     let message_error_i18n = i18n.clone();
+    let submit_status_i18n = i18n.clone();
+    let submit_status = move || {
+        let key = match submit_state.get() {
+            ContactSubmitState::Idle | ContactSubmitState::Sending => return None,
+            ContactSubmitState::Accepted => MessageKey::HomepageContactFormStatusAccepted,
+            ContactSubmitState::Duplicate => MessageKey::HomepageContactFormStatusDuplicate,
+            ContactSubmitState::Error => MessageKey::HomepageContactFormStatusError,
+        };
+
+        Some(i18n::text(&submit_status_i18n, key))
+    };
     let contact_address_label = move || {
         let key = if contact_method.get() == ContactMethod::Email {
             MessageKey::HomepageContactFormEmailLabel
@@ -138,15 +163,38 @@ fn ContactForm() -> impl IntoView {
     let handle_method_change = move |event| {
         if let Some(method) = ContactMethod::from_value(&event_target_value(&event)) {
             set_contact_method.set(method);
+            set_submit_state.set(ContactSubmitState::Idle);
         }
     };
     let on_submit = move |event: SubmitEvent| {
         event.prevent_default();
         set_submitted.set(true);
+        set_submit_state.set(ContactSubmitState::Idle);
 
         if form_has_errors() {
             return;
         }
+
+        set_submit_state.set(ContactSubmitState::Sending);
+        let values = SupportContactValues {
+            display_name: name.get_untracked(),
+            outreach_method: contact_method.get_untracked().value().to_owned(),
+            contact_address: contact_address.get_untracked(),
+            message: message.get_untracked(),
+        };
+        let locale = locale.get_untracked();
+
+        spawn_local(async move {
+            let result =
+                submit_support_contact(config::RADROOTS_SUPPORT_CONTACT_URL, values, locale).await;
+            set_submit_state.set(match result {
+                SupportContactSubmitResult::Accepted => ContactSubmitState::Accepted,
+                SupportContactSubmitResult::Duplicate => ContactSubmitState::Duplicate,
+                SupportContactSubmitResult::Rejected | SupportContactSubmitResult::Unavailable => {
+                    ContactSubmitState::Error
+                }
+            });
+        });
     };
 
     view! {
@@ -163,8 +211,12 @@ fn ContactForm() -> impl IntoView {
                         name="display_name"
                         type="text"
                         autocomplete="name"
+                        disabled=move || submit_state.get() == ContactSubmitState::Sending
                         prop:value=move || name.get()
-                        on:input=move |event| set_name.set(event_target_value(&event))
+                        on:input=move |event| {
+                            set_name.set(event_target_value(&event));
+                            set_submit_state.set(ContactSubmitState::Idle);
+                        }
                     />
                 </span>
                 {move || {
@@ -180,6 +232,7 @@ fn ContactForm() -> impl IntoView {
                         id="contact-method"
                         class="page-form-input page-form-input-select"
                         name="outreach_method"
+                        disabled=move || submit_state.get() == ContactSubmitState::Sending
                         prop:value=move || contact_method.get().value()
                         on:change=handle_method_change
                     >
@@ -203,8 +256,12 @@ fn ContactForm() -> impl IntoView {
                         name="contact_address"
                         type=contact_address_type
                         autocomplete=contact_address_autocomplete
+                        disabled=move || submit_state.get() == ContactSubmitState::Sending
                         prop:value=move || contact_address.get()
-                        on:input=move |event| set_contact_address.set(event_target_value(&event))
+                        on:input=move |event| {
+                            set_contact_address.set(event_target_value(&event));
+                            set_submit_state.set(ContactSubmitState::Idle);
+                        }
                     />
                 </span>
                 {move || {
@@ -224,8 +281,12 @@ fn ContactForm() -> impl IntoView {
                         class="page-form-input page-form-input-textarea"
                         name="message"
                         rows="4"
+                        disabled=move || submit_state.get() == ContactSubmitState::Sending
                         prop:value=move || message.get()
-                        on:input=move |event| set_message.set(event_target_value(&event))
+                        on:input=move |event| {
+                            set_message.set(event_target_value(&event));
+                            set_submit_state.set(ContactSubmitState::Idle);
+                        }
                     ></textarea>
                 </span>
                 {move || {
@@ -234,8 +295,24 @@ fn ContactForm() -> impl IntoView {
                     })
                 }}
             </label>
-            <button class="page-form-submit" type="submit">
-                {submit_label}
+            {move || {
+                submit_status().map(|status| view! {
+                    <p class="page-form-status">{status}</p>
+                })
+            }}
+            <button
+                class="page-form-submit"
+                type="submit"
+                disabled=move || submit_state.get() == ContactSubmitState::Sending
+            >
+                {move || {
+                    if submit_state.get() == ContactSubmitState::Sending {
+                        view! { <PageLoader /> }.into_any()
+                    } else {
+                        let submit_label = i18n::text(&submit_i18n, MessageKey::HomepageContactFormSubmit);
+                        view! { <span>{submit_label}</span> }.into_any()
+                    }
+                }}
             </button>
         </form>
     }

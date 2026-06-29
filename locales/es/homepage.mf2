@@ -94,4 +94,10 @@ contact.form.validation.public_key_required = Ingresa tu clave pública.
 
 contact.form.validation.message_required = Ingresa un mensaje.
 
+contact.form.status.accepted = Mensaje enviado. Te responderemos pronto.
+
+contact.form.status.duplicate = Este mensaje ya fue recibido.
+
+contact.form.status.error = No se pudo enviar el mensaje. Inténtalo de nuevo pronto.
+
 not_found.body = 404 - Página no encontrada
