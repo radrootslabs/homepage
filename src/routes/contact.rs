@@ -1,4 +1,5 @@
 use leptos::{ev::SubmitEvent, prelude::*};
+use leptos_lucide_rs::ChevronsUpDown;
 
 use crate::components::{PageLayout, PageSection, PageText};
 use crate::i18n::{self, MessageKey};
@@ -111,7 +112,7 @@ fn ContactForm() -> impl IntoView {
             </label>
             <label class="page-form-field" for="contact-method">
                 <span class="page-form-label">{method_label}</span>
-                <span class="page-form-control">
+                <span class="page-form-control page-form-control-select">
                     <select
                         id="contact-method"
                         class="page-form-input page-form-input-select"
@@ -122,6 +123,9 @@ fn ContactForm() -> impl IntoView {
                         <option value="email">{email_label}</option>
                         <option value="nostr">{nostr_label}</option>
                     </select>
+                    <span class="page-form-select-icon">
+                        <ChevronsUpDown />
+                    </span>
                 </span>
             </label>
             <label class="page-form-field" for="contact-address">

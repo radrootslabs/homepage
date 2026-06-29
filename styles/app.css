@@ -3,6 +3,8 @@
     --brand-green: #5da33f;
     --brand-graphite: #555248;
     --brand-graphite-light: #746F62;
+    --brand-graphite-light-subtle: #6B685D;
+    --brand-graphite-light-soft: #7A7568;
     --on-green-primary: #ffffff;
     --on-green-hover: var(--brand-graphite);
     --on-green-hover-underline: var(--brand-graphite);
@@ -25,6 +27,7 @@
     --page-form-input-padding-block: 10px;
     --page-form-input-padding-inline: 12px;
     --page-form-label-size: 16px;
+    --page-form-select-icon-size: 18px;
     --page-form-width: 520px;
     --page-gutter: 24px;
     --page-inline-icon-bold-offset: 0.015em;
@@ -284,7 +287,7 @@ body {
     border: var(--page-form-control-border-width) solid var(--on-green-primary);
     border-radius: 2px;
     box-sizing: border-box;
-    color: var(--brand-brown);
+    color: var(--brand-graphite);
     display: flex;
     min-block-size: var(--page-form-control-min-height);
     transition:
@@ -294,7 +297,7 @@ body {
 
 .page-form-control:focus-within,
 .page-form-control-error {
-    border-color: var(--brand-graphite);
+    border-color: var(--brand-graphite-light-soft);
 }
 
 .page-form-input {
@@ -322,6 +325,32 @@ body {
 
 .page-form-input-select {
     cursor: pointer;
+    padding-inline-end: calc(
+        (var(--page-form-input-padding-inline) * 2) +
+        var(--page-form-select-icon-size)
+    );
+}
+
+.page-form-control-select {
+    position: relative;
+}
+
+.page-form-select-icon {
+    block-size: var(--page-form-select-icon-size);
+    color: var(--brand-graphite);
+    display: block;
+    inline-size: var(--page-form-select-icon-size);
+    inset-block-start: 50%;
+    inset-inline-end: var(--page-form-input-padding-inline);
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+.page-form-select-icon .lucide-icon {
+    block-size: 100%;
+    display: block;
+    inline-size: 100%;
 }
 
 .page-form-control-tall {
