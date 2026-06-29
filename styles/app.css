@@ -323,6 +323,13 @@ body {
     outline: 0;
 }
 
+.page-form-error {
+    color: var(--page-ink);
+    font-size: var(--page-form-label-size);
+    font-weight: var(--page-text-weight);
+    line-height: 1.2;
+}
+
 .page-form-input-select {
     cursor: pointer;
     padding-inline-end: calc(

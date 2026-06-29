@@ -84,4 +84,14 @@ contact.form.message_label = How can we help?
 
 contact.form.submit = Send message
 
+contact.form.validation.name_required = Enter your name.
+
+contact.form.validation.email_required = Enter your email address.
+
+contact.form.validation.email_invalid = Enter a valid email address.
+
+contact.form.validation.public_key_required = Enter your public key.
+
+contact.form.validation.message_required = Enter a message.
+
 not_found.body = 404 - No page
