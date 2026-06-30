@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "0.9.0-alpha",
+  "kitVersion": "0.9.0-alpha",
+  "project": {
+    "configHash": "sha256:bb2653a9e6468246532bf958531396f78bbbe6fa8a28b033a92af0e56b2b0e66",
+    "crateRoot": ".",
+    "kind": "single-crate-trunk-csr"
+  },
+  "items": {
+    "builtin:button": {
+      "id": "builtin:button",
+      "name": "button",
+      "source": "builtin",
+      "version": "0.9.0-alpha",
+      "contentHash": "sha256:cd03f8983517289fb3b327542e0792a677666cd2e11048cb90ac33d7ff60ed81",
+      "files": [
+        {
+          "path": "src/components/ui/button.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:be31270e0bcb9815b29629298119ca3e91a0cf07499e4aa2d4e4585f920784b9",
+          "localHashAtInstall": "sha256:be31270e0bcb9815b29629298119ca3e91a0cf07499e4aa2d4e4585f920784b9"
+        }
+      ],
+      "styleBlocks": [
+        {
+          "cssPath": "styles/kit.css",
+          "blockId": "button",
+          "generatedHash": "sha256:b6d03d1205b43a963b252a9d256db17dddd902decdceedc0b3a83876a29b385d"
+        }
+      ]
+    }
+  },
+  "filesByPath": {
+    "src/components/ui/button.rs": "builtin:button"
+  },
+  "styleBlocksById": {
+    "button": "builtin:button"
+  }
+}

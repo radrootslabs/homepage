@@ -1,7 +1,6 @@
 PORT := 3000
 TRUNK_VERSION := 0.22.0-beta.1
 ENV_FILE := .env
-KIT_STATE_DIR := src/components/ui/_kit
 CARGO := $(shell rustup which cargo)
 RUSTC := $(shell rustup which rustc)
 TRUNK ?= trunk
@@ -12,7 +11,7 @@ TRUNK_ENV := env -u NO_COLOR CC_wasm32_unknown_unknown=$(WASM_CC) AR_wasm32_unkn
 LOAD_ENV := set -eu; set -a; . ./$(ENV_FILE); set +a
 LEPTOS_UI_KIT := "$${LEPTOS_UI_KIT_ROOT}/bin/leptos_ui_kit"
 
-.PHONY: build check dev install kit-plan kit-apply kit-check kit-migrate-state
+.PHONY: build check dev install kit-plan kit-apply kit-check
 
 check:
 	$(CARGO_ENV) RUSTC=$(RUSTC) $(CARGO) check --target wasm32-unknown-unknown
@@ -44,6 +43,3 @@ kit-apply:
 kit-check:
 	@$(LOAD_ENV); $(LEPTOS_UI_KIT) sync --dry-run --json
 	@$(LOAD_ENV); $(LEPTOS_UI_KIT) doctor --strict --json
-
-kit-migrate-state:
-	@$(LOAD_ENV); $(LEPTOS_UI_KIT) migrate state-dir $(KIT_STATE_DIR)

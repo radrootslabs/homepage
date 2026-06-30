@@ -1,5 +1,5 @@
 {
-  "$schema": "https://triesap.github.io/leptos_ui_kit/schema/0.9.0-alpha/components.schema.json",
+  "$schema": "https://triesap.github.io/leptos_ui_kit/schema/0.9.0-alpha/kit.schema.json",
   "schemaVersion": "0.9.0-alpha",
   "tool": {
     "package": "leptos_ui_kit_cli",
@@ -7,7 +7,7 @@
     "source": {
       "kind": "git",
       "url": "https://github.com/triesap/leptos_ui_kit",
-      "rev": "9a290beeeb567424bca99e1ee4fb96e0d3067277"
+      "rev": "18f21844d9d2012e7a02910ab653a55cabf8b2fd"
     }
   },
   "project": {
@@ -28,7 +28,7 @@
   },
   "styles": {
     "mode": "pure-css",
-    "css": "styles/app.css"
+    "css": "styles/kit.css"
   },
   "registry": {
     "source": "builtin"
@@ -38,8 +38,5 @@
       "name": "button",
       "source": "builtin"
     }
-  ],
-  "state": {
-    "dir": "src/components/ui/_kit_state"
-  }
+  ]
 }

@@ -1,6 +1,6 @@
 /dist/
 /target/
 /.local/
+/src/components/ui/_kit/.write.lock
 !.env.example
 .env
-_kit_state

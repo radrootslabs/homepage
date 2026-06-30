@@ -441,9 +441,9 @@ fn is_valid_nostr_pubkey(value: &str) -> bool {
 }
 
 fn contact_server_error(rejection: &ContactRejection) -> Option<ContactServerError> {
-    let field = rejection.field.as_deref()?;
+    let field_name = rejection.field.as_deref()?;
     let message = rejection.message.as_deref();
-    let field = match field {
+    let field = match field_name {
         "identity.display_name" => ContactFormField::Name,
         "identity.email" | "identity.nostr" => ContactFormField::ContactAddress,
         "message" => ContactFormField::Message,
@@ -460,12 +460,12 @@ fn contact_server_error(rejection: &ContactRejection) -> Option<ContactServerErr
         Some("errors.body.nostr_invalid") => {
             MessageKey::HomepageContactFormValidationPublicKeyInvalid
         }
-        Some("errors.body.required") => match field {
-            ContactFormField::Name => MessageKey::HomepageContactFormValidationNameRequired,
-            ContactFormField::ContactAddress => {
-                MessageKey::HomepageContactFormValidationPublicKeyRequired
-            }
-            ContactFormField::Message => MessageKey::HomepageContactFormValidationMessageRequired,
+        Some("errors.body.required") => match field_name {
+            "identity.display_name" => MessageKey::HomepageContactFormValidationNameRequired,
+            "identity.email" => MessageKey::HomepageContactFormValidationEmailRequired,
+            "identity.nostr" => MessageKey::HomepageContactFormValidationPublicKeyRequired,
+            "message" => MessageKey::HomepageContactFormValidationMessageRequired,
+            _ => return None,
         },
         _ => return None,
     };
