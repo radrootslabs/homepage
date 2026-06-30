@@ -1,7 +1,10 @@
 use leptos::{ev::SubmitEvent, prelude::*, task::spawn_local};
 use leptos_lucide_rs::{ChevronsUpDown, Key};
 
-use crate::components::{PageLayout, PageLoader, PageText};
+use crate::components::{
+    PageLayout, PageLoader, PageText,
+    ui::{Button, ButtonSize, ButtonType, ButtonVariant},
+};
 use crate::config;
 use crate::features::contact::submission::{
     ContactRejection, ContactSubmitResult, ContactValues, submit_contact,
@@ -386,20 +389,29 @@ fn ContactForm() -> impl IntoView {
                     <p class="page-form-status">{status}</p>
                 })
             }}
-            <button
-                class="page-form-submit"
-                type="submit"
-                disabled=move || submit_state.get() == ContactSubmitState::Sending
-            >
-                {move || {
-                    if submit_state.get() == ContactSubmitState::Sending {
-                        view! { <PageLoader /> }.into_any()
-                    } else {
-                        let submit_label = i18n::text(&submit_i18n, MessageKey::HomepageContactFormSubmit);
-                        view! { <span>{submit_label}</span> }.into_any()
-                    }
-                }}
-            </button>
+            {move || {
+                let sending = submit_state.get() == ContactSubmitState::Sending;
+                let content = if sending {
+                    view! { <PageLoader /> }.into_any()
+                } else {
+                    let submit_label = i18n::text(
+                        &submit_i18n,
+                        MessageKey::HomepageContactFormSubmit,
+                    );
+                    view! { <span>{submit_label}</span> }.into_any()
+                };
+
+                view! {
+                    <Button
+                        variant=ButtonVariant::Primary
+                        size=ButtonSize::Lg
+                        button_type=ButtonType::Submit
+                        disabled=sending
+                    >
+                        {content}
+                    </Button>
+                }
+            }}
         </form>
     }
 }

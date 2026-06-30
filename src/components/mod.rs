@@ -25,3 +25,4 @@ pub use page_nostr_key::PageNostrKey;
 pub use page_section::PageSection;
 pub use page_text::PageText;
 pub use page_text_link::PageTextLink;
+pub mod ui;

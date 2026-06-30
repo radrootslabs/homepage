@@ -1,4 +1,6 @@
 /dist/
 /target/
+/.local/
 !.env.example
 .env
+_kit_state
