@@ -2,7 +2,7 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:eedf6f1809b0841329f89067743570ff17fd074d1d572ff6cf397b9ceca688a4",
+    "configHash": "sha256:29add6aa8adf7089c0a9bbbc05578c453c2e145eb648170143366ade36d7b391",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
@@ -126,7 +126,7 @@
       "name": "menu",
       "source": "builtin",
       "version": "0.9.0-alpha",
-      "contentHash": "sha256:cd0d6acc19c72b6741f699bcbca629e659552dd71e98ca598755ee4e49cd569d",
+      "contentHash": "sha256:c7d95088c056023ee96a20f267420948d635936dfd07d2f26fa4c56b0c33b63d",
       "files": [
         {
           "path": "src/components/ui/menu/mod.rs",
@@ -137,8 +137,8 @@
         {
           "path": "src/components/ui/menu/root.rs",
           "kind": "rust",
-          "generatedHash": "sha256:ed12cb5f698de9f28808023598f4fa0818c9953195a481973aa1ea7077e93ab2",
-          "localHashAtInstall": "sha256:ed12cb5f698de9f28808023598f4fa0818c9953195a481973aa1ea7077e93ab2"
+          "generatedHash": "sha256:7c2d0eaf7d1deddf2b7ba250260de9859e165dcd00bbd6cac211de87b78e96a1",
+          "localHashAtInstall": "sha256:7c2d0eaf7d1deddf2b7ba250260de9859e165dcd00bbd6cac211de87b78e96a1"
         },
         {
           "path": "src/components/ui/menu/trigger.rs",
