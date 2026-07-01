@@ -14,3 +14,5 @@ pub use field::{
 };
 pub mod spinner;
 pub use spinner::Spinner;
+pub mod status;
+pub use status::{Status, StatusPoliteness, StatusRole};

@@ -7,7 +7,7 @@
     "source": {
       "kind": "git",
       "url": "https://github.com/triesap/leptos_ui_kit",
-      "rev": "a8113e6a539e34e2ffc39118cb3a7348b66f4f2f"
+      "rev": "711d8dcfe6f70e352f9f313f95daf451e7a9b5b5"
     }
   },
   "project": {
@@ -48,6 +48,10 @@
     },
     {
       "name": "spinner",
+      "source": "builtin"
+    },
+    {
+      "name": "status",
       "source": "builtin"
     }
   ]

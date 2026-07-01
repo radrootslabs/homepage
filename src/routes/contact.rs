@@ -5,8 +5,8 @@ use crate::components::{
     PageLayout, PageText,
     ui::{
         Button, ButtonSize, ButtonType, ButtonVariant, FieldLabel, FieldMessage, FieldRequired,
-        FieldRoot, FieldSurface, NativeSelect, SelectIcon, Spinner, TextArea, TextInput,
-        TextInputType,
+        FieldRoot, FieldSurface, NativeSelect, SelectIcon, Spinner, Status, StatusPoliteness,
+        StatusRole, TextArea, TextInput, TextInputType,
     },
 };
 use crate::config;
@@ -125,16 +125,6 @@ fn ContactForm() -> impl IntoView {
     let message_error_i18n = i18n.clone();
     let submit_status_i18n = i18n.clone();
     let browser_public_key = LocalResource::new(browser::load_public_key);
-    let submit_status = move || {
-        let key = match submit_state.get() {
-            ContactSubmitState::Idle | ContactSubmitState::Sending => return None,
-            ContactSubmitState::Accepted => MessageKey::HomepageContactFormStatusAccepted,
-            ContactSubmitState::Duplicate => MessageKey::HomepageContactFormStatusDuplicate,
-            ContactSubmitState::Error => MessageKey::HomepageContactFormStatusError,
-        };
-
-        Some(i18n::text(&submit_status_i18n, key))
-    };
     let contact_address_label = move || {
         let key = if contact_method.get() == ContactMethod::Email {
             MessageKey::HomepageContactFormEmailLabel
@@ -419,8 +409,30 @@ fn ContactForm() -> impl IntoView {
                 }}
             </FieldRoot>
             {move || {
-                submit_status().map(|status| view! {
-                    <p class="page-form-status">{status}</p>
+                let (key, role, politeness) = match submit_state.get() {
+                    ContactSubmitState::Idle | ContactSubmitState::Sending => return None,
+                    ContactSubmitState::Accepted => (
+                        MessageKey::HomepageContactFormStatusAccepted,
+                        StatusRole::Status,
+                        StatusPoliteness::Polite,
+                    ),
+                    ContactSubmitState::Duplicate => (
+                        MessageKey::HomepageContactFormStatusDuplicate,
+                        StatusRole::Status,
+                        StatusPoliteness::Polite,
+                    ),
+                    ContactSubmitState::Error => (
+                        MessageKey::HomepageContactFormStatusError,
+                        StatusRole::Alert,
+                        StatusPoliteness::Assertive,
+                    ),
+                };
+                let submit_status_i18n = submit_status_i18n.clone();
+
+                Some(view! {
+                    <Status class="page-form-status" role=role politeness=politeness>
+                        {i18n::text(&submit_status_i18n, key)}
+                    </Status>
                 })
             }}
             {move || {
