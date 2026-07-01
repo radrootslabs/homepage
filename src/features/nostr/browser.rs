@@ -1,9 +1,14 @@
+#[cfg(target_arch = "wasm32")]
 use gloo_timers::future::TimeoutFuture;
+#[cfg(target_arch = "wasm32")]
 use nostr_browser_signer::prelude::*;
 
+#[cfg(target_arch = "wasm32")]
 const PUBLIC_KEY_RETRY_COUNT: usize = 20;
+#[cfg(target_arch = "wasm32")]
 const PUBLIC_KEY_RETRY_DELAY_MS: u32 = 150;
 
+#[cfg(target_arch = "wasm32")]
 pub async fn load_public_key() -> Option<String> {
     for attempt in 0..PUBLIC_KEY_RETRY_COUNT {
         match BrowserSigner::new() {
@@ -18,5 +23,10 @@ pub async fn load_public_key() -> Option<String> {
         }
     }
 
+    None
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+pub async fn load_public_key() -> Option<String> {
     None
 }
