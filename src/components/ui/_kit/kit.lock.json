@@ -2,7 +2,7 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:082d40df53c7c7a237cca448633b52f7b83d232ca450808eda68f432d5b03cb7",
+    "configHash": "sha256:c893f41c24871ff2ef95b5c5dd09b24266dfd3f4e6acf2eb8cbc107e640be637",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
@@ -126,7 +126,7 @@
       "name": "menu",
       "source": "builtin",
       "version": "0.9.0-alpha",
-      "contentHash": "sha256:4e3649d25c43de8b0f22f78f96460576428777c9c5835243dc40da95b427b669",
+      "contentHash": "sha256:b534cfb348f2b98c319d6a3642dbfae1ceb607e80d7515e686826fe9e84a8d46",
       "files": [
         {
           "path": "src/components/ui/menu/mod.rs",
@@ -169,7 +169,7 @@
         {
           "cssPath": "styles/kit.css",
           "blockId": "menu",
-          "generatedHash": "sha256:1eed7738f6efce28e98e4f0b2ed941ac9935f8f675a6f873071604773fdb5ccc"
+          "generatedHash": "sha256:f7353b474a6084fb8748081508bc7eb07406a9d7fa718c2425e3419b4c96a036"
         }
       ]
     },

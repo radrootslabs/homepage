@@ -246,6 +246,10 @@
   justify-content: center;
   inline-size: var(--kit-menu-item-indicator-inline-size);
 }
+
+.kit-menu-item-indicator[hidden] {
+  display: none;
+}
 /* leptos-ui-kit:end menu */
 
 /* leptos-ui-kit:start field */
