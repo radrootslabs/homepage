@@ -2,10 +2,11 @@ use leptos::{ev::SubmitEvent, prelude::*, task::spawn_local};
 use leptos_lucide_rs::{ChevronsUpDown, Key};
 
 use crate::components::{
-    PageLayout, PageLoader, PageText,
+    PageLayout, PageText,
     ui::{
         Button, ButtonSize, ButtonType, ButtonVariant, FieldLabel, FieldMessage, FieldRequired,
-        FieldRoot, FieldSurface, NativeSelect, SelectIcon, TextArea, TextInput, TextInputType,
+        FieldRoot, FieldSurface, NativeSelect, SelectIcon, Spinner, TextArea, TextInput,
+        TextInputType,
     },
 };
 use crate::config;
@@ -421,13 +422,13 @@ fn ContactForm() -> impl IntoView {
             }}
             {move || {
                 let sending = submit_state.get() == ContactSubmitState::Sending;
+                let submit_label = i18n::text(
+                    &submit_i18n,
+                    MessageKey::HomepageContactFormSubmit,
+                );
                 let content = if sending {
-                    view! { <PageLoader /> }.into_any()
+                    view! { <Spinner class="page-form-spinner" label=submit_label /> }.into_any()
                 } else {
-                    let submit_label = i18n::text(
-                        &submit_i18n,
-                        MessageKey::HomepageContactFormSubmit,
-                    );
                     view! { <span>{submit_label}</span> }.into_any()
                 };
 

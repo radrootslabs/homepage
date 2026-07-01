@@ -12,3 +12,5 @@ pub use field::{
     FieldLabel, FieldMessage, FieldRequired, FieldRoot, FieldSurface, NativeSelect, SelectIcon,
     TextArea, TextInput, TextInputType,
 };
+pub mod spinner;
+pub use spinner::Spinner;

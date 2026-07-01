@@ -2,7 +2,7 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:5c6640cb68b3553f5fb436fcaf94cfdf14ccd946dd992c42cda886bb95fd26d9",
+    "configHash": "sha256:25f4c9765c68ca8be6d5bf2b1d70948e411ab0256504717927118b4bccf3862d",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
@@ -150,6 +150,28 @@
           "generatedHash": "sha256:1eed7738f6efce28e98e4f0b2ed941ac9935f8f675a6f873071604773fdb5ccc"
         }
       ]
+    },
+    "builtin:spinner": {
+      "id": "builtin:spinner",
+      "name": "spinner",
+      "source": "builtin",
+      "version": "0.9.0-alpha",
+      "contentHash": "sha256:a593d8b7dc166f556b38ffc1a9b2f5d4bae47137cbabcf02e53b9d2ca3212161",
+      "files": [
+        {
+          "path": "src/components/ui/spinner.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:ab02c92fc12b1e1f5aeaa9b6f6259fa177bcc451da731a217e2f999a1a40ca2a",
+          "localHashAtInstall": "sha256:ab02c92fc12b1e1f5aeaa9b6f6259fa177bcc451da731a217e2f999a1a40ca2a"
+        }
+      ],
+      "styleBlocks": [
+        {
+          "cssPath": "styles/kit.css",
+          "blockId": "spinner",
+          "generatedHash": "sha256:736f9458ba25973db7371e02732ee9f87e02fe7d9e6686e94d76f52cfc26cd6d"
+        }
+      ]
     }
   },
   "filesByPath": {
@@ -168,11 +190,13 @@
     "src/components/ui/menu/item_indicator.rs": "builtin:menu",
     "src/components/ui/menu/mod.rs": "builtin:menu",
     "src/components/ui/menu/root.rs": "builtin:menu",
-    "src/components/ui/menu/trigger.rs": "builtin:menu"
+    "src/components/ui/menu/trigger.rs": "builtin:menu",
+    "src/components/ui/spinner.rs": "builtin:spinner"
   },
   "styleBlocksById": {
     "button": "builtin:button",
     "field": "builtin:field",
-    "menu": "builtin:menu"
+    "menu": "builtin:menu",
+    "spinner": "builtin:spinner"
   }
 }

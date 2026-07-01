@@ -49,6 +49,7 @@
     --page-form-required-color: #ff2a1f;
     --page-form-select-icon-size: 18px;
     --page-form-submit-min-height: 68px;
+    --page-form-spinner-size: 22px;
     --page-form-textarea-min-height: 420px;
     --page-form-width: 520px;
     --page-gutter: 24px;
@@ -71,7 +72,6 @@
     --page-locale-row-padding-block: 6px;
     --page-locale-row-padding-inline: 8px;
     --page-locale-row-width: 104px;
-    --page-loader-size: 22px;
     --page-nav-actions-gap: 16px;
     --page-nav-public-key-size: 12px;
     --page-nav-public-key-width: 46rem;
@@ -547,24 +547,10 @@ body {
     resize: vertical;
 }
 
-.page-loader {
-    animation: page-loader-spin 1600ms linear infinite;
-    block-size: var(--page-loader-size);
-    color: currentColor;
-    display: block;
-    inline-size: var(--page-loader-size);
-}
-
-.page-loader .lucide-icon {
-    block-size: 100%;
-    display: block;
-    inline-size: 100%;
-}
-
-@keyframes page-loader-spin {
-    to {
-        transform: rotate(360deg);
-    }
+.page-form-spinner {
+    --kit-spinner-animation-duration: 1600ms;
+    --kit-spinner-block-size: var(--page-form-spinner-size);
+    --kit-spinner-inline-size: var(--page-form-spinner-size);
 }
 
 @keyframes page-form-fade-in {
