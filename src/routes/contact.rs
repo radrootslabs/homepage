@@ -3,7 +3,10 @@ use leptos_lucide_rs::{ChevronsUpDown, Key};
 
 use crate::components::{
     PageLayout, PageLoader, PageText,
-    ui::{Button, ButtonSize, ButtonType, ButtonVariant},
+    ui::{
+        Button, ButtonSize, ButtonType, ButtonVariant, FieldLabel, FieldMessage, FieldRequired,
+        FieldRoot, FieldSurface, NativeSelect, SelectIcon, TextArea, TextInput, TextInputType,
+    },
 };
 use crate::config;
 use crate::features::contact::submission::{
@@ -139,20 +142,6 @@ fn ContactForm() -> impl IntoView {
         };
         i18n::text(&address_i18n, key)
     };
-    let contact_address_type = move || {
-        if contact_method.get() == ContactMethod::Email {
-            "email"
-        } else {
-            "text"
-        }
-    };
-    let contact_address_autocomplete = move || {
-        if contact_method.get() == ContactMethod::Email {
-            "email"
-        } else {
-            "off"
-        }
-    };
     let name_error = Signal::derive(move || {
         required_error(
             &name.get(),
@@ -200,8 +189,18 @@ fn ContactForm() -> impl IntoView {
             || contact_address_error.get().is_some()
             || message_error.get().is_some()
     };
-    let handle_method_change = move |event| {
-        if let Some(method) = ContactMethod::from_value(&event_target_value(&event)) {
+    let sending = Signal::derive(move || submit_state.get() == ContactSubmitState::Sending);
+    let name_invalid = Signal::derive(move || name_error.get().is_some());
+    let contact_address_invalid = Signal::derive(move || contact_address_error.get().is_some());
+    let message_invalid = Signal::derive(move || message_error.get().is_some());
+    let contact_method_value = Signal::derive(move || contact_method.get().value().to_owned());
+    let handle_name_input = Callback::new(move |value: String| {
+        set_name.set(value);
+        set_submit_state.set(ContactSubmitState::Idle);
+        set_server_error.set(None);
+    });
+    let handle_method_change = Callback::new(move |value: String| {
+        if let Some(method) = ContactMethod::from_value(&value) {
             if contact_method.get_untracked() != method {
                 set_contact_address.set(String::new());
             }
@@ -209,7 +208,17 @@ fn ContactForm() -> impl IntoView {
             set_submit_state.set(ContactSubmitState::Idle);
             set_server_error.set(None);
         }
-    };
+    });
+    let handle_contact_address_input = Callback::new(move |value: String| {
+        set_contact_address.set(value);
+        set_submit_state.set(ContactSubmitState::Idle);
+        set_server_error.set(None);
+    });
+    let handle_message_input = Callback::new(move |value: String| {
+        set_message.set(value);
+        set_submit_state.set(ContactSubmitState::Idle);
+        set_server_error.set(None);
+    });
     let on_submit = move |event: SubmitEvent| {
         event.prevent_default();
         set_submitted.set(true);
@@ -249,40 +258,38 @@ fn ContactForm() -> impl IntoView {
 
     view! {
         <form class="page-contact-form" method="post" on:submit=on_submit novalidate>
-            <div class="page-form-field">
-                <span
-                    class="page-form-control"
-                    class:page-form-control-error=move || name_error.get().is_some()
-                >
-                    <label class="page-form-label" for="contact-name">
+            <FieldRoot
+                id="contact-name"
+                class="page-form-field"
+                invalid=name_invalid
+                disabled=sending
+            >
+                <FieldSurface class="page-form-control">
+                    <FieldLabel class="page-form-label">
                         {name_label}
-                        <span class="page-form-required">"*"</span>
-                    </label>
-                    <input
-                        id="contact-name"
+                        <FieldRequired class="page-form-required" />
+                    </FieldLabel>
+                    <TextInput
                         class="page-form-input"
                         name="display_name"
-                        type="text"
                         autocomplete="name"
-                        disabled=move || submit_state.get() == ContactSubmitState::Sending
-                        prop:value=move || name.get()
-                        on:input=move |event| {
-                            set_name.set(event_target_value(&event));
-                            set_submit_state.set(ContactSubmitState::Idle);
-                            set_server_error.set(None);
-                        }
+                        disabled=sending
+                        invalid=name_invalid
+                        value=Signal::derive(move || name.get())
+                        on_input=handle_name_input
                     />
-                </span>
+                </FieldSurface>
                 {move || {
+                    let name_error_i18n = name_error_i18n.clone();
                     name_error.get().map(|key| view! {
-                        <span class="page-form-error">{i18n::text(&name_error_i18n, key)}</span>
+                        <FieldMessage class="page-form-error">{i18n::text(&name_error_i18n, key)}</FieldMessage>
                     })
                 }}
-            </div>
-            <div class="page-form-field">
-                <span class="page-form-control page-form-control-select">
+            </FieldRoot>
+            <FieldRoot id="contact-method" class="page-form-field" disabled=sending>
+                <FieldSurface class="page-form-control page-form-control-select">
                     <span class="page-form-label-row">
-                        <label class="page-form-label" for="contact-method">{method_label}</label>
+                        <FieldLabel class="page-form-label">{method_label}</FieldLabel>
                         {move || {
                             if contact_method.get() != ContactMethod::Nostr {
                                 return None;
@@ -305,7 +312,7 @@ fn ContactForm() -> impl IntoView {
                                             size=ButtonSize::Sm
                                             button_type=ButtonType::Button
                                             class="page-form-inline-action"
-                                            disabled=move || submit_state.get() == ContactSubmitState::Sending
+                                            disabled=sending
                                             on_click=Callback::new(move |_| {
                                                 let public_key = public_key.get_value();
                                                 set_contact_address.set(public_key);
@@ -320,86 +327,93 @@ fn ContactForm() -> impl IntoView {
                                 })
                         }}
                     </span>
-                    <select
-                        id="contact-method"
+                    <NativeSelect
                         class="page-form-native-select"
                         name="outreach_method"
-                        disabled=move || submit_state.get() == ContactSubmitState::Sending
-                        prop:value=move || contact_method.get().value()
-                        on:change=handle_method_change
+                        disabled=sending
+                        value=contact_method_value
+                        on_change=handle_method_change
                     >
                         <option value="email">{email_label}</option>
                         <option value="nostr">{nostr_label}</option>
-                    </select>
+                    </NativeSelect>
                     <span class="page-form-select-row">
                         <span class="page-form-select-value">{method_value_label}</span>
                     </span>
-                    <span class="page-form-select-icon">
+                    <SelectIcon class="page-form-select-icon">
                         <ChevronsUpDown />
-                    </span>
-                </span>
-            </div>
-            <div class="page-form-field">
-                <span
-                    class="page-form-control"
-                    class:page-form-control-error=move || contact_address_error.get().is_some()
-                >
+                    </SelectIcon>
+                </FieldSurface>
+            </FieldRoot>
+            <FieldRoot
+                id="contact-address"
+                class="page-form-field"
+                invalid=contact_address_invalid
+                disabled=sending
+            >
+                <FieldSurface class="page-form-control">
                     <span class="page-form-label-row">
-                        <label class="page-form-label" for="contact-address">
+                        <FieldLabel class="page-form-label">
                             {contact_address_label}
-                            <span class="page-form-required">"*"</span>
-                        </label>
+                            <FieldRequired class="page-form-required" />
+                        </FieldLabel>
                     </span>
-                    <input
-                        id="contact-address"
-                        class="page-form-input"
-                        name="contact_address"
-                        type=contact_address_type
-                        autocomplete=contact_address_autocomplete
-                        disabled=move || submit_state.get() == ContactSubmitState::Sending
-                        prop:value=move || contact_address.get()
-                        on:input=move |event| {
-                            set_contact_address.set(event_target_value(&event));
-                            set_submit_state.set(ContactSubmitState::Idle);
-                            set_server_error.set(None);
+                    {move || {
+                        let (input_type, autocomplete) = if contact_method.get() == ContactMethod::Email {
+                            (TextInputType::Email, "email")
+                        } else {
+                            (TextInputType::Text, "off")
+                        };
+
+                        view! {
+                            <TextInput
+                                class="page-form-input"
+                                input_type=input_type
+                                name="contact_address"
+                                autocomplete=autocomplete
+                                disabled=sending
+                                invalid=contact_address_invalid
+                                value=Signal::derive(move || contact_address.get())
+                                on_input=handle_contact_address_input
+                            />
                         }
-                    />
-                </span>
+                    }}
+                </FieldSurface>
                 {move || {
+                    let address_error_i18n = address_error_i18n.clone();
                     contact_address_error.get().map(|key| view! {
-                        <span class="page-form-error">{i18n::text(&address_error_i18n, key)}</span>
+                        <FieldMessage class="page-form-error">{i18n::text(&address_error_i18n, key)}</FieldMessage>
                     })
                 }}
-            </div>
-            <div class="page-form-field">
-                <span
-                    class="page-form-control page-form-control-tall"
-                    class:page-form-control-error=move || message_error.get().is_some()
-                >
-                    <label class="page-form-label" for="contact-message">
+            </FieldRoot>
+            <FieldRoot
+                id="contact-message"
+                class="page-form-field"
+                invalid=message_invalid
+                disabled=sending
+            >
+                <FieldSurface class="page-form-control page-form-control-tall">
+                    <FieldLabel class="page-form-label">
                         {message_label}
-                        <span class="page-form-required">"*"</span>
-                    </label>
-                    <textarea
-                        id="contact-message"
+                        <FieldRequired class="page-form-required" />
+                    </FieldLabel>
+                    <TextArea
                         class="page-form-input page-form-input-textarea"
                         name="message"
-                        rows="4"
-                        disabled=move || submit_state.get() == ContactSubmitState::Sending
-                        prop:value=move || message.get()
-                        on:input=move |event| {
-                            set_message.set(event_target_value(&event));
-                            set_submit_state.set(ContactSubmitState::Idle);
-                            set_server_error.set(None);
-                        }
-                    ></textarea>
-                </span>
+                        rows=4
+                        disabled=sending
+                        invalid=message_invalid
+                        value=Signal::derive(move || message.get())
+                        on_input=handle_message_input
+                    />
+                </FieldSurface>
                 {move || {
+                    let message_error_i18n = message_error_i18n.clone();
                     message_error.get().map(|key| view! {
-                        <span class="page-form-error">{i18n::text(&message_error_i18n, key)}</span>
+                        <FieldMessage class="page-form-error">{i18n::text(&message_error_i18n, key)}</FieldMessage>
                     })
                 }}
-            </div>
+            </FieldRoot>
             {move || {
                 submit_status().map(|status| view! {
                     <p class="page-form-status">{status}</p>

@@ -2,7 +2,7 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:8e48dbffd517785d324a048310d2c1fbcdac34e5972cb70189fc7a3e81d13955",
+    "configHash": "sha256:5c6640cb68b3553f5fb436fcaf94cfdf14ccd946dd992c42cda886bb95fd26d9",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
@@ -26,6 +26,76 @@
           "cssPath": "styles/kit.css",
           "blockId": "button",
           "generatedHash": "sha256:b6d03d1205b43a963b252a9d256db17dddd902decdceedc0b3a83876a29b385d"
+        }
+      ]
+    },
+    "builtin:field": {
+      "id": "builtin:field",
+      "name": "field",
+      "source": "builtin",
+      "version": "0.9.0-alpha",
+      "contentHash": "sha256:fd85272f5bf8565c474659cfa73c8224d5a9daf6cdd293f9c144ef16f254d322",
+      "files": [
+        {
+          "path": "src/components/ui/field/mod.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:931859d31f043083081f7251cbefa855891dcf9c2ffd16a5df812bea4c112c90",
+          "localHashAtInstall": "sha256:931859d31f043083081f7251cbefa855891dcf9c2ffd16a5df812bea4c112c90"
+        },
+        {
+          "path": "src/components/ui/field/root.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:5876ca64b1176a7be07b6136788842a510af0259acb358fd98ca4392280937cf",
+          "localHashAtInstall": "sha256:5876ca64b1176a7be07b6136788842a510af0259acb358fd98ca4392280937cf"
+        },
+        {
+          "path": "src/components/ui/field/surface.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:35fa704c0febebeca14ad51ad9f08a7dda7a16805dbec62fcfee72769ce4fd2b",
+          "localHashAtInstall": "sha256:35fa704c0febebeca14ad51ad9f08a7dda7a16805dbec62fcfee72769ce4fd2b"
+        },
+        {
+          "path": "src/components/ui/field/label.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:7378a6ff1bf5611177a85fec0b16f93e8b0569f6b2b1555ce41ead9c775cd0ee",
+          "localHashAtInstall": "sha256:7378a6ff1bf5611177a85fec0b16f93e8b0569f6b2b1555ce41ead9c775cd0ee"
+        },
+        {
+          "path": "src/components/ui/field/required.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:cfd73386a81c911f4863127083d9e9d886896803fc4243e27e79ba552d04442e",
+          "localHashAtInstall": "sha256:cfd73386a81c911f4863127083d9e9d886896803fc4243e27e79ba552d04442e"
+        },
+        {
+          "path": "src/components/ui/field/message.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:9475bf9d609d7eb94dfe7d602354461a5fc7651beb17106f0d28cc4138e4a756",
+          "localHashAtInstall": "sha256:9475bf9d609d7eb94dfe7d602354461a5fc7651beb17106f0d28cc4138e4a756"
+        },
+        {
+          "path": "src/components/ui/field/text_input.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:3d776db8529673f7b2ef37c172ea1fb193981274c27d48bd5300c8a727e5d59a",
+          "localHashAtInstall": "sha256:3d776db8529673f7b2ef37c172ea1fb193981274c27d48bd5300c8a727e5d59a"
+        },
+        {
+          "path": "src/components/ui/field/text_area.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:4b2586f678900d52f063768af67d8d930b3508712ce1799b1ae71701b5b384f4",
+          "localHashAtInstall": "sha256:4b2586f678900d52f063768af67d8d930b3508712ce1799b1ae71701b5b384f4"
+        },
+        {
+          "path": "src/components/ui/field/native_select.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:af9f283b92b22626f0ac999cf941f5ae01cf8c18b4f91e201d27423c1fa809ce",
+          "localHashAtInstall": "sha256:af9f283b92b22626f0ac999cf941f5ae01cf8c18b4f91e201d27423c1fa809ce"
+        }
+      ],
+      "styleBlocks": [
+        {
+          "cssPath": "styles/kit.css",
+          "blockId": "field",
+          "generatedHash": "sha256:3e52398e3316d07eadb6f2ab6d0d7ae0cad0e59928e19a3f70859190408369ab"
         }
       ]
     },
@@ -84,6 +154,15 @@
   },
   "filesByPath": {
     "src/components/ui/button.rs": "builtin:button",
+    "src/components/ui/field/label.rs": "builtin:field",
+    "src/components/ui/field/message.rs": "builtin:field",
+    "src/components/ui/field/mod.rs": "builtin:field",
+    "src/components/ui/field/native_select.rs": "builtin:field",
+    "src/components/ui/field/required.rs": "builtin:field",
+    "src/components/ui/field/root.rs": "builtin:field",
+    "src/components/ui/field/surface.rs": "builtin:field",
+    "src/components/ui/field/text_area.rs": "builtin:field",
+    "src/components/ui/field/text_input.rs": "builtin:field",
     "src/components/ui/menu/content.rs": "builtin:menu",
     "src/components/ui/menu/item.rs": "builtin:menu",
     "src/components/ui/menu/item_indicator.rs": "builtin:menu",
@@ -93,6 +172,7 @@
   },
   "styleBlocksById": {
     "button": "builtin:button",
+    "field": "builtin:field",
     "menu": "builtin:menu"
   }
 }
