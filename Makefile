@@ -24,7 +24,7 @@ dev:
 
 install:
 	RUSTC=$(RUSTC) $(CARGO) install trunk --version $(TRUNK_VERSION) --locked
-	@$(LOAD_ENV); RUSTC=$(RUSTC) $(CARGO) install \
+	@$(LOAD_ENV); RUSTC=$(RUSTC) CARGO_TARGET_DIR=".local/build/leptos-ui-kit-$${LEPTOS_UI_KIT_REV}" $(CARGO) install \
 		--git "$${LEPTOS_UI_KIT_GIT_URL}" \
 		--rev "$${LEPTOS_UI_KIT_REV}" \
 		--locked \

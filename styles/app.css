@@ -156,22 +156,34 @@ body {
 
 .page-locale-button {
     align-items: center;
-    anchor-name: --page-locale-button;
     background: transparent;
     border: 0;
+    border-radius: 0;
     color: var(--page-ink);
     cursor: pointer;
     display: inline-flex;
     font: inherit;
+    font-weight: inherit;
     font-size: var(--page-nav-public-key-size);
     gap: var(--page-locale-button-gap);
     line-height: 1;
     margin: 0;
+    min-block-size: 0;
+    min-height: 0;
     padding: 0;
 }
 
 .page-locale-button:hover {
     color: var(--on-green-hover);
+}
+
+.page-locale-button.kit-menu-trigger:hover:not(:disabled) {
+    background: transparent;
+    color: var(--on-green-hover);
+}
+
+.page-locale-button.kit-menu-trigger:focus-visible {
+    outline: 0;
 }
 
 .page-locale-chevron,
@@ -185,7 +197,7 @@ body {
     transition: transform 140ms ease-out;
 }
 
-.page-locale-menu:has(.page-locale-popover:popover-open) .page-locale-chevron {
+.page-locale-button[data-state="open"] .page-locale-chevron {
     transform: rotate(180deg);
 }
 
@@ -196,24 +208,17 @@ body {
     box-shadow: none;
     color: var(--brand-brown);
     font-family: var(--font-sans);
-    inset: auto;
-    margin: var(--page-locale-popover-gap) 0 0;
+    gap: 0;
+    inset-block-start: calc(100% + var(--page-locale-popover-gap));
+    inset-inline-end: 0;
+    inset-inline-start: auto;
+    margin: 0;
     max-block-size: calc(100dvb - (var(--page-gutter) * 2));
     max-inline-size: calc(100vw - (var(--page-gutter) * 2));
+    min-inline-size: 0;
     overflow: auto;
     padding: var(--page-locale-popover-padding);
-    position: absolute;
-    position-anchor: --page-locale-button;
-    position-area: bottom span-left;
-    position-try-fallbacks:
-        top span-left,
-        bottom span-right,
-        top span-right;
-}
-
-.page-locale-list {
-    display: flex;
-    flex-direction: column;
+    transform: none;
 }
 
 .page-locale-option {
@@ -230,6 +235,8 @@ body {
     inline-size: var(--page-locale-row-width);
     line-height: 1;
     margin: 0;
+    min-block-size: 0;
+    min-height: 0;
     padding:
         var(--page-locale-row-padding-block)
         var(--page-locale-row-padding-inline);
@@ -238,6 +245,11 @@ body {
 
 .page-locale-option:hover,
 .page-locale-option-active {
+    color: var(--brand-graphite);
+}
+
+.page-locale-option.kit-menu-item[data-highlighted] {
+    background: transparent;
     color: var(--brand-graphite);
 }
 

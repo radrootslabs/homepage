@@ -2,10 +2,9 @@ use leptos::prelude::*;
 use leptos_lucide_rs::{Check, ChevronDown};
 use leptos_router::{NavigateOptions, hooks::use_navigate};
 
+use crate::components::ui::{MenuContent, MenuItem, MenuRoot, MenuTrigger};
 use crate::i18n;
 use crate::routes::{LocalisedRouteContext, localised_path};
-
-const POPOVER_ID: &str = "page-locale-menu-popover";
 
 #[component]
 pub fn PageLocaleMenu() -> impl IntoView {
@@ -17,65 +16,59 @@ pub fn PageLocaleMenu() -> impl IntoView {
     let navigate = use_navigate();
 
     view! {
-        <div class="page-locale-menu">
-            <button
-                class="page-locale-button"
-                type="button"
-                popovertarget=POPOVER_ID
-            >
+        <MenuRoot class="page-locale-menu">
+            <MenuTrigger class="page-locale-button">
                 <span>{current_locale}</span>
                 <span class="page-locale-chevron">
                     <ChevronDown />
                 </span>
-            </button>
-            <div
-                class="page-locale-popover"
-                id=POPOVER_ID
-                popover="auto"
-            >
-                <div class="page-locale-list">
-                    {i18n::SUPPORTED_LOCALES
-                        .iter()
-                        .map(|option_locale| {
-                            let option_locale = *option_locale;
-                            let target_path = localised_path(route.key, option_locale);
-                            let option_navigate = navigate.clone();
-                            let option_signal = locale;
-                            let check_signal = locale;
+            </MenuTrigger>
+            <MenuContent class="page-locale-popover">
+                {i18n::SUPPORTED_LOCALES
+                    .iter()
+                    .enumerate()
+                    .map(|(index, option_locale)| {
+                        let option_locale = *option_locale;
+                        let target_path = localised_path(route.key, option_locale);
+                        let option_navigate = navigate.clone();
+                        let option_class = if route.locale == option_locale {
+                            "page-locale-option page-locale-option-active"
+                        } else {
+                            "page-locale-option"
+                        };
 
-                            view! {
-                                <button
-                                    class="page-locale-option"
-                                    class:page-locale-option-active=move || option_signal.get() == option_locale
-                                    type="button"
-                                    popovertarget=POPOVER_ID
-                                    popovertargetaction="hide"
-                                    on:click=move |_| {
-                                        option_navigate(
-                                            target_path,
-                                            NavigateOptions {
-                                                resolve: false,
-                                                ..NavigateOptions::default()
-                                            },
-                                        );
-                                    }
-                                >
-                                    <span>{option_locale}</span>
-                                    <span class="page-locale-check-slot">
-                                        {move || {
-                                            (check_signal.get() == option_locale).then_some(view! {
-                                                <span class="page-locale-check">
-                                                    <Check />
-                                                </span>
-                                            })
-                                        }}
-                                    </span>
-                                </button>
-                            }
-                        })
-                        .collect_view()}
-                </div>
-            </div>
-        </div>
+                        view! {
+                            <MenuItem
+                                index=index
+                                label=option_locale.to_owned()
+                                class=option_class
+                                on_select=Callback::new(move |_| {
+                                    option_navigate(
+                                        target_path,
+                                        NavigateOptions {
+                                            resolve: false,
+                                            ..NavigateOptions::default()
+                                        },
+                                    );
+                                })
+                            >
+                                <span>{option_locale}</span>
+                                <span class="page-locale-check-slot">
+                                    {then_check(route.locale == option_locale)}
+                                </span>
+                            </MenuItem>
+                        }
+                    })
+                    .collect_view()}
+            </MenuContent>
+        </MenuRoot>
     }
+}
+
+fn then_check(active: bool) -> Option<impl IntoView> {
+    active.then_some(view! {
+        <span class="page-locale-check">
+            <Check />
+        </span>
+    })
 }

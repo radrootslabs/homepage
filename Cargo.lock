@@ -1929,6 +1929,7 @@ dependencies = [
  "nostr-browser-signer",
  "serde",
  "serde_json",
+ "web_ui_primitives",
 ]
 
 [[package]]
@@ -2794,6 +2795,32 @@ checksum = "8622dcb61c0bcc9fffa6938bed81210af2da9a7e4a1a834b2e37a59b6dfb6141"
 dependencies = [
  "js-sys",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "web_ui_primitives"
+version = "0.1.0"
+source = "git+https://github.com/triesap/web_ui_primitives?rev=67117663f968a01d738dfbe22e03557a70681047#67117663f968a01d738dfbe22e03557a70681047"
+dependencies = [
+ "web_ui_primitives_core",
+ "web_ui_primitives_leptos",
+]
+
+[[package]]
+name = "web_ui_primitives_core"
+version = "0.1.0"
+source = "git+https://github.com/triesap/web_ui_primitives?rev=67117663f968a01d738dfbe22e03557a70681047#67117663f968a01d738dfbe22e03557a70681047"
+
+[[package]]
+name = "web_ui_primitives_leptos"
+version = "0.1.0"
+source = "git+https://github.com/triesap/web_ui_primitives?rev=67117663f968a01d738dfbe22e03557a70681047#67117663f968a01d738dfbe22e03557a70681047"
+dependencies = [
+ "leptos",
+ "send_wrapper",
+ "wasm-bindgen",
+ "web-sys",
+ "web_ui_primitives_core",
 ]
 
 [[package]]
