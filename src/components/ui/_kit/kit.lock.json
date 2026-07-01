@@ -2,7 +2,7 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:c7b749a8f90ac2b071096530226897e86baaba887e7622e6e6068611447035e9",
+    "configHash": "sha256:a048534b40f4873d9b45675cb4e6658a460f002debb9a541ec4e797e1858d754",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
@@ -104,7 +104,7 @@
       "name": "menu",
       "source": "builtin",
       "version": "0.9.0-alpha",
-      "contentHash": "sha256:ca9fba7e7b22fe6e72bcaf6ddce01d89fcc1da9c0bb9d258accc250e21ecad66",
+      "contentHash": "sha256:da97aaa19e9b70afdba93f1806f32b2839a8ce94002804106a618f1e268ad062",
       "files": [
         {
           "path": "src/components/ui/menu/mod.rs",
@@ -115,8 +115,8 @@
         {
           "path": "src/components/ui/menu/root.rs",
           "kind": "rust",
-          "generatedHash": "sha256:426b076e066e1fc5a612665911683aa90f9ceeded14f7da1e4b7590dad2eb9a9",
-          "localHashAtInstall": "sha256:426b076e066e1fc5a612665911683aa90f9ceeded14f7da1e4b7590dad2eb9a9"
+          "generatedHash": "sha256:448f7c6b01621076fe395ec49d45651bd21d841d96702852c66c504742c6e4d6",
+          "localHashAtInstall": "sha256:448f7c6b01621076fe395ec49d45651bd21d841d96702852c66c504742c6e4d6"
         },
         {
           "path": "src/components/ui/menu/trigger.rs",
@@ -133,14 +133,14 @@
         {
           "path": "src/components/ui/menu/item.rs",
           "kind": "rust",
-          "generatedHash": "sha256:4b1d8f6cb3513f2df6c99777730b359f7670bffc58ccdb87867d273add11f48c",
-          "localHashAtInstall": "sha256:4b1d8f6cb3513f2df6c99777730b359f7670bffc58ccdb87867d273add11f48c"
+          "generatedHash": "sha256:b768437f205b8ef89fa025f7886002a91bd11b738e3d77fb62be7c3c8050ac62",
+          "localHashAtInstall": "sha256:b768437f205b8ef89fa025f7886002a91bd11b738e3d77fb62be7c3c8050ac62"
         },
         {
           "path": "src/components/ui/menu/item_indicator.rs",
           "kind": "rust",
-          "generatedHash": "sha256:097273e3c83ac4ed50284751a7653354240e873bc469c653ce2c4517f21eb977",
-          "localHashAtInstall": "sha256:097273e3c83ac4ed50284751a7653354240e873bc469c653ce2c4517f21eb977"
+          "generatedHash": "sha256:0070d376cda7e9ba976ea7bff4d77d217e714ceed4ff369feb1841a3e266e406",
+          "localHashAtInstall": "sha256:0070d376cda7e9ba976ea7bff4d77d217e714ceed4ff369feb1841a3e266e406"
         }
       ],
       "styleBlocks": [

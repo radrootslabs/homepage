@@ -243,8 +243,7 @@ body {
     text-align: start;
 }
 
-.page-locale-option:hover,
-.page-locale-option-active {
+.page-locale-option:hover {
     color: var(--brand-graphite);
 }
 
