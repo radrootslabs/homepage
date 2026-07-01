@@ -1,5 +1,5 @@
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 const HOMEPAGE_ENV_VARS: &[&str] = &[
     "RADROOTS_GIT_URL",
@@ -9,6 +9,8 @@ const HOMEPAGE_ENV_VARS: &[&str] = &[
     "RADROOTS_CLI_URL",
     "RADROOTS_CONTACT_URL",
 ];
+
+const NETWORK_GRAPH_FILENAME: &str = "radroots_network_graph.svg";
 
 fn main() {
     let manifest_dir =
@@ -36,6 +38,8 @@ fn main() {
         println!("cargo:rustc-env={key}={value}");
     }
 
+    verify_localised_network_graph_assets(&manifest_dir, &config_path);
+
     let build_output = mf2_i18n::build_leptos_target(
         &mf2_i18n::LeptosTargetBuildOptions::new(&config_path, "app").with_out_dir(&out_dir),
     )
@@ -48,5 +52,29 @@ fn main() {
 
     for path in build_output.native_output().rerun_if_changed_paths() {
         println!("cargo:rerun-if-changed={}", path.display());
+    }
+}
+
+fn verify_localised_network_graph_assets(manifest_dir: &Path, config_path: &Path) {
+    let config = mf2_i18n::load_project_config(config_path).unwrap_or_else(|error| {
+        panic!(
+            "failed to load radroots homepage i18n config from {}: {error}",
+            config_path.display()
+        )
+    });
+    let asset_root = manifest_dir.join("public").join("assets").join("i18n");
+
+    println!("cargo:rerun-if-changed={}", asset_root.display());
+
+    for locale in &config.locales {
+        let path = asset_root.join(locale).join(NETWORK_GRAPH_FILENAME);
+        println!("cargo:rerun-if-changed={}", path.display());
+
+        if !path.is_file() {
+            panic!(
+                "missing localised network graph asset for locale {locale}: {}",
+                path.display()
+            );
+        }
     }
 }
