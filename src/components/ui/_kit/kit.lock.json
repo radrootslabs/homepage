@@ -2,11 +2,33 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:a048534b40f4873d9b45675cb4e6658a460f002debb9a541ec4e797e1858d754",
+    "configHash": "sha256:935d45b3eff6151aa2ee7975a1785844f8f3e3db6068d88ba120431df7ced951",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
   "items": {
+    "builtin:anchor": {
+      "id": "builtin:anchor",
+      "name": "anchor",
+      "source": "builtin",
+      "version": "0.9.0-alpha",
+      "contentHash": "sha256:a6648752fc52e57e7f0f2ad030a63155ede5f6aaf93394e17d7761ec93860904",
+      "files": [
+        {
+          "path": "src/components/ui/anchor.rs",
+          "kind": "rust",
+          "generatedHash": "sha256:2d81ce4558ee0a198c4b89e791e891d3080ad6f79a106bd201f9a794ec96635e",
+          "localHashAtInstall": "sha256:2d81ce4558ee0a198c4b89e791e891d3080ad6f79a106bd201f9a794ec96635e"
+        }
+      ],
+      "styleBlocks": [
+        {
+          "cssPath": "styles/kit.css",
+          "blockId": "anchor",
+          "generatedHash": "sha256:66d84a1747a3b0047599415c7dbc45a4e92b3d3efd56fde9990000a7cb4351de"
+        }
+      ]
+    },
     "builtin:button": {
       "id": "builtin:button",
       "name": "button",
@@ -197,6 +219,7 @@
     }
   },
   "filesByPath": {
+    "src/components/ui/anchor.rs": "builtin:anchor",
     "src/components/ui/button.rs": "builtin:button",
     "src/components/ui/field/label.rs": "builtin:field",
     "src/components/ui/field/message.rs": "builtin:field",
@@ -217,6 +240,7 @@
     "src/components/ui/status.rs": "builtin:status"
   },
   "styleBlocksById": {
+    "anchor": "builtin:anchor",
     "button": "builtin:button",
     "field": "builtin:field",
     "menu": "builtin:menu",

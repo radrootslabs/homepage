@@ -7,7 +7,7 @@
     "source": {
       "kind": "git",
       "url": "https://github.com/triesap/leptos_ui_kit",
-      "rev": "dd95d819754d5e53c7633c2b2d80ac457b56d1e5"
+      "rev": "4ed8a1c35e3675ec055d113946d7c1ad2e73da9c"
     }
   },
   "project": {
@@ -34,6 +34,10 @@
     "source": "builtin"
   },
   "items": [
+    {
+      "name": "anchor",
+      "source": "builtin"
+    },
     {
       "name": "button",
       "source": "builtin"

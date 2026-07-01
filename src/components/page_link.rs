@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use leptos_router::components::A;
 
+use crate::components::ui::Anchor;
 use crate::routes::{LocalisedRouteContext, RouteKey, localised_path};
 
 #[derive(Clone, Copy)]
@@ -29,9 +30,9 @@ pub(super) fn PageLink(
             .into_any()
         }
         PageHref::External(href) => view! {
-            <a class=class href=href>
+            <Anchor class=class href=href>
                 {children()}
-            </a>
+            </Anchor>
         }
         .into_any(),
     }
