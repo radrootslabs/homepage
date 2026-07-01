@@ -2,7 +2,7 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:bb2653a9e6468246532bf958531396f78bbbe6fa8a28b033a92af0e56b2b0e66",
+    "configHash": "sha256:18e5fab5a1f33d5687a460104ecec1b167dc11996371815e05051cd39c441c72",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
@@ -12,13 +12,13 @@
       "name": "button",
       "source": "builtin",
       "version": "0.9.0-alpha",
-      "contentHash": "sha256:cd03f8983517289fb3b327542e0792a677666cd2e11048cb90ac33d7ff60ed81",
+      "contentHash": "sha256:94c5125c96e1bcfe293af6012bad990f88f12e3797497622baf2807901833a30",
       "files": [
         {
           "path": "src/components/ui/button.rs",
           "kind": "rust",
-          "generatedHash": "sha256:be31270e0bcb9815b29629298119ca3e91a0cf07499e4aa2d4e4585f920784b9",
-          "localHashAtInstall": "sha256:be31270e0bcb9815b29629298119ca3e91a0cf07499e4aa2d4e4585f920784b9"
+          "generatedHash": "sha256:07b13935e4e1b3ef98759b4970b28d400ae91dc8d99683f5686f028c2bb557ee",
+          "localHashAtInstall": "sha256:07b13935e4e1b3ef98759b4970b28d400ae91dc8d99683f5686f028c2bb557ee"
         }
       ],
       "styleBlocks": [

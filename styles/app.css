@@ -6,6 +6,7 @@
     --brand-graphite-light-subtle: #6B685D;
     --brand-graphite-light-soft: #7A7568;
     --brand-ios-blue: #007aff;
+    --brand-ios-blue-hover: #006ad6;
     --on-green-primary: #ffffff;
     --on-green-hover: var(--brand-graphite);
     --on-green-hover-underline: var(--brand-graphite);
@@ -331,6 +332,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     min-inline-size: 0;
+    position: relative;
+    z-index: 4;
 }
 
 .page-form-required {
@@ -350,9 +353,15 @@ body {
     font-size: var(--page-form-inline-action-size);
     font-weight: 300;
     gap: var(--page-form-inline-action-gap);
+    inline-size: auto;
     line-height: 1.05;
     margin: 0;
+    min-block-size: 0;
+    min-height: 0;
     padding: 0;
+    pointer-events: auto;
+    position: relative;
+    z-index: 3;
 }
 
 .page-form-inline-action .lucide-icon {
@@ -371,6 +380,16 @@ body {
 
 .page-form-inline-action:hover {
     text-decoration: none;
+}
+
+.page-form-inline-action.kit-button--ghost {
+    background: transparent;
+    color: var(--brand-ios-blue);
+}
+
+.page-form-inline-action.kit-button--ghost:hover:not(:disabled) {
+    background: transparent;
+    color: var(--brand-ios-blue-hover);
 }
 
 .page-form-control {
@@ -426,23 +445,51 @@ body {
     margin: 0;
 }
 
-.page-form-input-select {
+.page-form-native-select {
+    appearance: none;
+    block-size: 100%;
+    border: 0;
     cursor: pointer;
-    padding-inline-end: calc(
-        (var(--page-form-control-padding-inline) * 2) +
-        var(--page-form-select-icon-size)
-    );
+    inset: 0;
+    inline-size: 100%;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.page-form-native-select:disabled {
+    cursor: wait;
+}
+
+.page-form-native-select:focus {
+    outline: 0;
 }
 
 .page-form-select-row {
-    display: block;
+    align-items: baseline;
+    column-gap: var(--page-form-label-row-gap);
+    display: flex;
     min-inline-size: 0;
+    padding-inline-end: calc(
+        var(--page-form-control-padding-inline) +
+        var(--page-form-select-icon-size)
+    );
+    pointer-events: none;
     place-self: end stretch;
+    position: relative;
+    z-index: 2;
 }
 
-.page-form-select-row .page-form-input-select {
-    inline-size: 100%;
-    place-self: auto;
+.page-form-select-value {
+    color: inherit;
+    display: inline-block;
+    font-family: var(--page-form-input-font);
+    font-size: var(--page-form-input-size);
+    font-weight: 300;
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
 .page-form-control-select {
@@ -459,6 +506,7 @@ body {
     pointer-events: none;
     position: absolute;
     transform: translateY(-50%);
+    z-index: 2;
 }
 
 .page-form-select-icon .lucide-icon {
@@ -636,7 +684,7 @@ body {
     --kit-radius-md: 2px;
 }
 
-.page-contact-form .kit-button {
+.page-contact-form > .page-form-submit.kit-button {
     box-sizing: border-box;
     font-size: var(--page-text-size);
     font-weight: var(--page-text-weight);
@@ -647,11 +695,11 @@ body {
         var(--page-form-control-padding-inline);
 }
 
-.page-contact-form .kit-button:disabled {
+.page-contact-form > .page-form-submit.kit-button:disabled {
     cursor: wait;
     opacity: 1;
 }
 
-.page-contact-form .kit-button--primary:hover:not(:disabled) {
+.page-contact-form > .page-form-submit.kit-button--primary:hover:not(:disabled) {
     background: var(--on-green-primary);
 }

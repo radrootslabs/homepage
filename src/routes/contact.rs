@@ -99,6 +99,17 @@ fn ContactForm() -> impl IntoView {
     let nostr_i18n = i18n.clone();
     let nostr_label =
         move || i18n::text(&nostr_i18n, MessageKey::HomepageContactFormReplyMethodNostr);
+    let method_value_i18n = i18n.clone();
+    let method_value_label = move || match contact_method.get() {
+        ContactMethod::Email => i18n::text(
+            &method_value_i18n,
+            MessageKey::HomepageContactFormReplyMethodEmail,
+        ),
+        ContactMethod::Nostr => i18n::text(
+            &method_value_i18n,
+            MessageKey::HomepageContactFormReplyMethodNostr,
+        ),
+    };
     let address_i18n = i18n.clone();
     let message_i18n = i18n.clone();
     let message_label =
@@ -286,37 +297,42 @@ fn ContactForm() -> impl IntoView {
                                         &browser_signer_i18n,
                                         MessageKey::HomepageContactFormUseBrowserSigner,
                                     );
+                                    let public_key = StoredValue::new(public_key);
 
                                     view! {
-                                        <button
+                                        <Button
+                                            variant=ButtonVariant::Ghost
+                                            size=ButtonSize::Sm
+                                            button_type=ButtonType::Button
                                             class="page-form-inline-action"
-                                            type="button"
                                             disabled=move || submit_state.get() == ContactSubmitState::Sending
-                                            on:click=move |_| {
-                                                set_contact_address.set(public_key.clone());
+                                            on_click=Callback::new(move |_| {
+                                                let public_key = public_key.get_value();
+                                                set_contact_address.set(public_key);
                                                 set_submit_state.set(ContactSubmitState::Idle);
                                                 set_server_error.set(None);
-                                            }
+                                            })
                                         >
                                             <span>{button_label}</span>
                                             <Key />
-                                        </button>
+                                        </Button>
                                     }
                                 })
                         }}
                     </span>
+                    <select
+                        id="contact-method"
+                        class="page-form-native-select"
+                        name="outreach_method"
+                        disabled=move || submit_state.get() == ContactSubmitState::Sending
+                        prop:value=move || contact_method.get().value()
+                        on:change=handle_method_change
+                    >
+                        <option value="email">{email_label}</option>
+                        <option value="nostr">{nostr_label}</option>
+                    </select>
                     <span class="page-form-select-row">
-                        <select
-                            id="contact-method"
-                            class="page-form-input page-form-input-select"
-                            name="outreach_method"
-                            disabled=move || submit_state.get() == ContactSubmitState::Sending
-                            prop:value=move || contact_method.get().value()
-                            on:change=handle_method_change
-                        >
-                            <option value="email">{email_label}</option>
-                            <option value="nostr">{nostr_label}</option>
-                        </select>
+                        <span class="page-form-select-value">{method_value_label}</span>
                     </span>
                     <span class="page-form-select-icon">
                         <ChevronsUpDown />
@@ -406,6 +422,7 @@ fn ContactForm() -> impl IntoView {
                         variant=ButtonVariant::Primary
                         size=ButtonSize::Lg
                         button_type=ButtonType::Submit
+                        class="page-form-submit"
                         disabled=sending
                     >
                         {content}
