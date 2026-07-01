@@ -262,6 +262,7 @@ fn ContactForm() -> impl IntoView {
             <FieldRoot
                 id="contact-name"
                 class="page-form-field"
+                required=true
                 invalid=name_invalid
                 disabled=sending
             >
@@ -349,6 +350,7 @@ fn ContactForm() -> impl IntoView {
             <FieldRoot
                 id="contact-address"
                 class="page-form-field"
+                required=true
                 invalid=contact_address_invalid
                 disabled=sending
             >
@@ -390,6 +392,7 @@ fn ContactForm() -> impl IntoView {
             <FieldRoot
                 id="contact-message"
                 class="page-form-field"
+                required=true
                 invalid=message_invalid
                 disabled=sending
             >

@@ -2,7 +2,7 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:25f4c9765c68ca8be6d5bf2b1d70948e411ab0256504717927118b4bccf3862d",
+    "configHash": "sha256:d7253ff26f19c01e273e94fa3770bdbd1445de0e4056b980a78112c224d9e3fd",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
@@ -34,7 +34,7 @@
       "name": "field",
       "source": "builtin",
       "version": "0.9.0-alpha",
-      "contentHash": "sha256:fd85272f5bf8565c474659cfa73c8224d5a9daf6cdd293f9c144ef16f254d322",
+      "contentHash": "sha256:98dbfd01a2b605e558ede3dbeb83bd276b7b89362d05b997e0ddb814d33b52e4",
       "files": [
         {
           "path": "src/components/ui/field/mod.rs",
@@ -45,8 +45,8 @@
         {
           "path": "src/components/ui/field/root.rs",
           "kind": "rust",
-          "generatedHash": "sha256:5876ca64b1176a7be07b6136788842a510af0259acb358fd98ca4392280937cf",
-          "localHashAtInstall": "sha256:5876ca64b1176a7be07b6136788842a510af0259acb358fd98ca4392280937cf"
+          "generatedHash": "sha256:9fe6d8da820178ad64e81a0263d5b0dbaca09e7f58b3eec2a97eea43997eb1b0",
+          "localHashAtInstall": "sha256:9fe6d8da820178ad64e81a0263d5b0dbaca09e7f58b3eec2a97eea43997eb1b0"
         },
         {
           "path": "src/components/ui/field/surface.rs",
@@ -63,8 +63,8 @@
         {
           "path": "src/components/ui/field/required.rs",
           "kind": "rust",
-          "generatedHash": "sha256:cfd73386a81c911f4863127083d9e9d886896803fc4243e27e79ba552d04442e",
-          "localHashAtInstall": "sha256:cfd73386a81c911f4863127083d9e9d886896803fc4243e27e79ba552d04442e"
+          "generatedHash": "sha256:1b5f49b4f1c099765cc28324e573eb6fd69b2e6141f17a22384b7bb57657ed8b",
+          "localHashAtInstall": "sha256:1b5f49b4f1c099765cc28324e573eb6fd69b2e6141f17a22384b7bb57657ed8b"
         },
         {
           "path": "src/components/ui/field/message.rs",
@@ -75,20 +75,20 @@
         {
           "path": "src/components/ui/field/text_input.rs",
           "kind": "rust",
-          "generatedHash": "sha256:3d776db8529673f7b2ef37c172ea1fb193981274c27d48bd5300c8a727e5d59a",
-          "localHashAtInstall": "sha256:3d776db8529673f7b2ef37c172ea1fb193981274c27d48bd5300c8a727e5d59a"
+          "generatedHash": "sha256:4ee867a9c93db6bec3b962d4641160dfe44fd79626cbcf3c2cf85277f709a7b3",
+          "localHashAtInstall": "sha256:4ee867a9c93db6bec3b962d4641160dfe44fd79626cbcf3c2cf85277f709a7b3"
         },
         {
           "path": "src/components/ui/field/text_area.rs",
           "kind": "rust",
-          "generatedHash": "sha256:4b2586f678900d52f063768af67d8d930b3508712ce1799b1ae71701b5b384f4",
-          "localHashAtInstall": "sha256:4b2586f678900d52f063768af67d8d930b3508712ce1799b1ae71701b5b384f4"
+          "generatedHash": "sha256:0595945d27e67c9872987ef9316875c91f8272b157e822cd815d5bf59e7a3485",
+          "localHashAtInstall": "sha256:0595945d27e67c9872987ef9316875c91f8272b157e822cd815d5bf59e7a3485"
         },
         {
           "path": "src/components/ui/field/native_select.rs",
           "kind": "rust",
-          "generatedHash": "sha256:af9f283b92b22626f0ac999cf941f5ae01cf8c18b4f91e201d27423c1fa809ce",
-          "localHashAtInstall": "sha256:af9f283b92b22626f0ac999cf941f5ae01cf8c18b4f91e201d27423c1fa809ce"
+          "generatedHash": "sha256:6d852584d0727dace64360a0e9f4a2ff98ed2e11d5195be306e1224a4e5e14ea",
+          "localHashAtInstall": "sha256:6d852584d0727dace64360a0e9f4a2ff98ed2e11d5195be306e1224a4e5e14ea"
         }
       ],
       "styleBlocks": [
