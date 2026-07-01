@@ -2,7 +2,7 @@
   "schemaVersion": "0.9.0-alpha",
   "kitVersion": "0.9.0-alpha",
   "project": {
-    "configHash": "sha256:c893f41c24871ff2ef95b5c5dd09b24266dfd3f4e6acf2eb8cbc107e640be637",
+    "configHash": "sha256:eedf6f1809b0841329f89067743570ff17fd074d1d572ff6cf397b9ceca688a4",
     "crateRoot": ".",
     "kind": "single-crate-trunk-csr"
   },
@@ -126,7 +126,7 @@
       "name": "menu",
       "source": "builtin",
       "version": "0.9.0-alpha",
-      "contentHash": "sha256:b534cfb348f2b98c319d6a3642dbfae1ceb607e80d7515e686826fe9e84a8d46",
+      "contentHash": "sha256:cd0d6acc19c72b6741f699bcbca629e659552dd71e98ca598755ee4e49cd569d",
       "files": [
         {
           "path": "src/components/ui/menu/mod.rs",
@@ -137,14 +137,14 @@
         {
           "path": "src/components/ui/menu/root.rs",
           "kind": "rust",
-          "generatedHash": "sha256:448f7c6b01621076fe395ec49d45651bd21d841d96702852c66c504742c6e4d6",
-          "localHashAtInstall": "sha256:448f7c6b01621076fe395ec49d45651bd21d841d96702852c66c504742c6e4d6"
+          "generatedHash": "sha256:ed12cb5f698de9f28808023598f4fa0818c9953195a481973aa1ea7077e93ab2",
+          "localHashAtInstall": "sha256:ed12cb5f698de9f28808023598f4fa0818c9953195a481973aa1ea7077e93ab2"
         },
         {
           "path": "src/components/ui/menu/trigger.rs",
           "kind": "rust",
-          "generatedHash": "sha256:3ac29ea6bcedeaa6715e210fbeaebd533ab083d777e9cb4114651f0264347d33",
-          "localHashAtInstall": "sha256:3ac29ea6bcedeaa6715e210fbeaebd533ab083d777e9cb4114651f0264347d33"
+          "generatedHash": "sha256:797680d7a40470f2bee78f553fed62a094a81da41effa02819bbac90d4fccc55",
+          "localHashAtInstall": "sha256:797680d7a40470f2bee78f553fed62a094a81da41effa02819bbac90d4fccc55"
         },
         {
           "path": "src/components/ui/menu/content.rs",
@@ -155,14 +155,14 @@
         {
           "path": "src/components/ui/menu/item.rs",
           "kind": "rust",
-          "generatedHash": "sha256:2e07487000c8c56b7f33c448035495634b76023d06bc98990216403abd5ec39d",
-          "localHashAtInstall": "sha256:2e07487000c8c56b7f33c448035495634b76023d06bc98990216403abd5ec39d"
+          "generatedHash": "sha256:b05341d42e0693536efcafc136a56aef9f3e947dea24ec338146224812b7db52",
+          "localHashAtInstall": "sha256:b05341d42e0693536efcafc136a56aef9f3e947dea24ec338146224812b7db52"
         },
         {
           "path": "src/components/ui/menu/item_indicator.rs",
           "kind": "rust",
-          "generatedHash": "sha256:0070d376cda7e9ba976ea7bff4d77d217e714ceed4ff369feb1841a3e266e406",
-          "localHashAtInstall": "sha256:0070d376cda7e9ba976ea7bff4d77d217e714ceed4ff369feb1841a3e266e406"
+          "generatedHash": "sha256:9554787bf6653ab2ddab07648d08f5945d52346afce2c5d0b53251d01697209d",
+          "localHashAtInstall": "sha256:9554787bf6653ab2ddab07648d08f5945d52346afce2c5d0b53251d01697209d"
         }
       ],
       "styleBlocks": [
