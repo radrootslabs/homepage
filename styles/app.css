@@ -23,6 +23,9 @@
         Consolas,
         monospace;
     --page-footer-height: 80px;
+    --page-focus-ring: var(--on-green-primary);
+    --page-focus-ring-offset: 4px;
+    --page-focus-ring-width: 2px;
     --page-form-control-min-height: 88px;
     --page-form-control-padding-block: 16px;
     --page-form-control-padding-inline: 20px;
@@ -44,6 +47,7 @@
     --page-form-label-size: 20px;
     --page-form-label-row-gap: 10px;
     --page-form-inline-action-gap: 0.25em;
+    --page-form-inline-action-focus-ring: var(--brand-ios-blue);
     --page-form-inline-action-size: 18px;
     --page-form-inline-icon-size: 0.9em;
     --page-form-required-color: #ff2a1f;
@@ -183,7 +187,8 @@ body {
 }
 
 .page-locale-button.kit-menu-trigger:focus-visible {
-    outline: 0;
+    outline: var(--page-focus-ring-width) solid var(--page-focus-ring);
+    outline-offset: var(--page-focus-ring-offset);
 }
 
 .page-locale-chevron,
@@ -390,7 +395,9 @@ body {
 }
 
 .page-form-inline-action:focus-visible {
-    outline: 0;
+    border-radius: 2px;
+    outline: var(--page-focus-ring-width) solid var(--page-form-inline-action-focus-ring);
+    outline-offset: 3px;
 }
 
 .page-form-inline-action:hover {
